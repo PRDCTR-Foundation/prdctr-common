@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.6](https://github.com/Predictor-Foundation/prdctr-common/compare/design-system-v0.1.5...design-system-v0.1.6) (2026-07-30)
+
+
+### Documentation
+
+* **packages:** rename Predictor to PRDCTR in prose and repo references ([#22](https://github.com/Predictor-Foundation/prdctr-common/issues/22)) ([81dc592](https://github.com/Predictor-Foundation/prdctr-common/commit/81dc592f0d05d48a39f495cc94a5a701e9fd9dd6))
+
 ## [0.1.5](https://github.com/Predictor-Foundation/predictor-common/compare/design-system-v0.1.4...design-system-v0.1.5) (2026-07-14)
 
 
