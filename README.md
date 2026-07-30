@@ -1,4 +1,4 @@
-# predictor-common
+# prdctr-common
 
 Shared TypeScript/Subsquid platform packages for the Predictor Foundation.
 Any TypeScript project - Subsquid or not - can pull in the dev-tooling

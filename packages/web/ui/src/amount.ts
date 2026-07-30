@@ -5,7 +5,7 @@
  * default, so these helpers make no assumption about any single token's scale.
  */
 
-/** Largest value representable in the Predictor chain's `u128` amount field. */
+/** Largest value representable in the PRDCTR chain's `u128` amount field. */
 export const MAX_U128 = (1n << 128n) - 1n;
 
 /** Why a human amount string could not be parsed into base units. */

@@ -1,4 +1,4 @@
-// Module augmentations for the Predictor design system. Importing this package
+// Module augmentations for the PRDCTR design system. Importing this package
 // applies them: the custom `neutral` palette colour and the Emotion `css` theme
 // callbacks become type-safe in consumers.
 import type {} from "@emotion/react";

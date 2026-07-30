@@ -2,7 +2,7 @@ import type { PredictorNetwork, PredictorNetworkId } from "./network";
 import { PREDICTOR_SS58_PREFIX } from "./ss58";
 
 /**
- * The block-explorer route namespace shared by every Predictor network. It is
+ * The block-explorer route namespace shared by every PRDCTR network. It is
  * the block-explorer's `network.name`
  * (block-explorer/packages/frontend/src/networks.json :: `predictor.name`) and
  * appears in the bridge dapp's hardcoded explorer links
@@ -21,7 +21,7 @@ function defineNetwork(net: PredictorNetwork): PredictorNetwork {
 }
 
 /**
- * The public Predictor testnet, code-named "Cassandra".
+ * The public PRDCTR testnet, code-named "Cassandra".
  *
  * Provenance:
  * - displayName, wsEndpoints[0], explorerBaseUrl:
@@ -33,7 +33,7 @@ function defineNetwork(net: PredictorNetwork): PredictorNetwork {
  */
 export const PREDICTOR_TESTNET: PredictorNetwork = defineNetwork({
 	id: "testnet",
-	displayName: "Cassandra - Predictor Public Testnet",
+	displayName: "Cassandra - PRDCTR Public Testnet",
 	ss58Prefix: PREDICTOR_SS58_PREFIX,
 	decimals: 10,
 	tokenSymbol: "PRD",
@@ -43,7 +43,7 @@ export const PREDICTOR_TESTNET: PredictorNetwork = defineNetwork({
 });
 
 /**
- * The internal Predictor development network.
+ * The internal PRDCTR development network.
  *
  * Provenance:
  * - explorerBaseUrl: prdctr-bridge-dapp/src/config/bridgeConfig.ts default for
@@ -58,7 +58,7 @@ export const PREDICTOR_TESTNET: PredictorNetwork = defineNetwork({
  */
 export const PREDICTOR_DEV: PredictorNetwork = defineNetwork({
 	id: "dev",
-	displayName: "Predictor Dev",
+	displayName: "PRDCTR Dev",
 	ss58Prefix: PREDICTOR_SS58_PREFIX,
 	decimals: 10,
 	tokenSymbol: "PRD",
@@ -67,7 +67,7 @@ export const PREDICTOR_DEV: PredictorNetwork = defineNetwork({
 	explorerNetworkPath: EXPLORER_NETWORK_PATH,
 });
 
-/** All known Predictor networks, keyed by their {@link PredictorNetworkId}. */
+/** All known PRDCTR networks, keyed by their {@link PredictorNetworkId}. */
 export const PREDICTOR_NETWORKS: Readonly<Record<PredictorNetworkId, PredictorNetwork>> = {
 	testnet: PREDICTOR_TESTNET,
 	dev: PREDICTOR_DEV,

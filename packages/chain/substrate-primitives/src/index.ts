@@ -10,7 +10,7 @@ import { getSs58AddressInfo } from "@polkadot-api/substrate-bindings";
 export type Ss58Address = string & { readonly __brand: "Ss58Address" };
 
 /**
- * Predictor's SS58 network prefix (matches the runtime `SS58Prefix = 42`). This is used when
+ * PRDCTR's SS58 network prefix (matches the runtime `SS58Prefix = 42`). This is used when
  * *encoding* an address from a public key; {@link parseSs58} accepts an address of any valid prefix.
  */
 export const PRD_SS58_PREFIX = 42;

@@ -1,4 +1,4 @@
-# Reusable release-please workflow. Every Predictor service repo had a
+# Reusable release-please workflow. Every PRDCTR service repo had a
 # byte-identical `release-please.yml`; this is the single source of truth they
 # call instead of each carrying their own copy.
 #
@@ -21,7 +21,7 @@
 #     pull-requests: write
 #   jobs:
 #     release-please:
-#       uses: Predictor-Foundation/predictor-common/.github/workflows/reusable-release-please.yml@main
+#       uses: Predictor-Foundation/prdctr-common/.github/workflows/reusable-release-please.yml@main
 #       secrets: inherit
 #
 # The config-file / manifest-file inputs default to the repo-root filenames every

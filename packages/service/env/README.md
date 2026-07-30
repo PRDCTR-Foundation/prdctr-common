@@ -1,6 +1,6 @@
 # @predictor-foundation/env
 
-Zod-based environment parsing primitives. Every Predictor service parses
+Zod-based environment parsing primitives. Every PRDCTR service parses
 `process.env` the same way - "validate against a schema at boot, fail loud on
 the first bad value" - and each had hand-rolled the same helpers. This package
 owns *how* env is parsed; your service owns *which* variables it reads.
