@@ -1,6 +1,6 @@
 # @predictor-foundation/e2e
 
-Zero-setup Playwright harness. A consumer repo gets Predictor's E2E defaults
+Zero-setup Playwright harness. A consumer repo gets PRDCTR's E2E defaults
 (reporters, retries, traces, browser projects, server orchestration) and the
 Playwright test API from a single import - no boilerplate.
 

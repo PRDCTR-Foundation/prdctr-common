@@ -22,7 +22,7 @@ copy of it.
 | `type Ss58Address` | A `string` branded valid. Only `parseSs58`/`assertSs58` mint one. |
 | `parseSs58(input)` | `Ss58Address \| null` - validates any valid SS58 prefix; trims input. |
 | `assertSs58(input)` | `Ss58Address` - throws `TypeError` on invalid input. |
-| `PRD_SS58_PREFIX` | `42` - Predictor's network prefix, for **encoding** an address from a public key (parsing accepts any prefix). |
+| `PRD_SS58_PREFIX` | `42` - PRDCTR's network prefix, for **encoding** an address from a public key (parsing accepts any prefix). |
 | `type Planck` | A `bigint` branded non-negative. Only `asPlanck` mints one. |
 | `asPlanck(value)` | `Planck` - throws `RangeError` on a negative amount. |
 

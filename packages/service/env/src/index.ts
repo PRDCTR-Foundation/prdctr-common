@@ -1,4 +1,4 @@
-// Environment parsing primitives. Every Predictor service loads config the same
+// Environment parsing primitives. Every PRDCTR service loads config the same
 // way - "parse process.env with a Zod schema at boot, and fail loud on the
 // first bad value" - and each one had hand-rolled the same three pieces:
 //   1. treat an empty-string env var as unset (so a schema default can apply),

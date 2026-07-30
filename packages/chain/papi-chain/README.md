@@ -69,7 +69,7 @@ const chainSpec = readFileSync("predictor.chainspec.json", "utf8");
 const chain = new Chain(prd, { smoldot: { chainSpec } });
 ```
 
-The trade-off is a warmup sync and higher in-process resource use, plus a weaker transaction-broadcast path than a well-connected full node - so WebSocket stays the pragmatic default and smoldot is the opt-in for trust-minimization. `chainSpec` is the chain-spec JSON (as a string) carrying the genesis and bootnodes. Predictor is a solo chain (Aura standalone), so its own spec is the whole story; a parachain would additionally need its relay chain's spec, which is not modelled here yet. `disconnect()` terminates the smoldot worker.
+The trade-off is a warmup sync and higher in-process resource use, plus a weaker transaction-broadcast path than a well-connected full node - so WebSocket stays the pragmatic default and smoldot is the opt-in for trust-minimization. `chainSpec` is the chain-spec JSON (as a string) carrying the genesis and bootnodes. PRDCTR is a solo chain (Aura standalone), so its own spec is the whole story; a parachain would additionally need its relay chain's spec, which is not modelled here yet. `disconnect()` terminates the smoldot worker.
 
 ## Install
 

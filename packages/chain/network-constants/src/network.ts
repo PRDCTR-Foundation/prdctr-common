@@ -1,7 +1,7 @@
 import type { Ss58Prefix } from "./ss58";
 
 /**
- * Identifier for a deployed Predictor network. This is the discriminant that
+ * Identifier for a deployed PRDCTR network. This is the discriminant that
  * distinguishes the network coordinates found across the repos.
  *
  * - `"testnet"` - the public testnet code-named "Cassandra".
@@ -21,7 +21,7 @@ export type PredictorNetworkId = "testnet" | "dev";
 export type WsEndpoints = readonly [string, ...string[]];
 
 /**
- * The full set of coordinates needed to talk to, and link into, one Predictor
+ * The full set of coordinates needed to talk to, and link into, one PRDCTR
  * network. Every field is `readonly`: these are compile-time constants, not
  * mutable config.
  *

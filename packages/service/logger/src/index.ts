@@ -23,7 +23,7 @@ const LEVEL_ORDER: Record<LogLevel, number> = {
 export type LogFields = Record<string, unknown>;
 
 /**
- * The log contract shared across Predictor services. Kept minimal and
+ * The log contract shared across PRDCTR services. Kept minimal and
  * structural so any compatible implementation (this one, or a Fastify/pino
  * adapter) satisfies it. Consumers that only need to *emit* logs should depend
  * on this interface, not on `createLogger`.

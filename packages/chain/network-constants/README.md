@@ -1,6 +1,6 @@
 # @predictor-foundation/network-constants
 
-Single source of truth for **Predictor network coordinates** - the SS58 prefix,
+Single source of truth for **PRDCTR network coordinates** - the SS58 prefix,
 token decimals/symbol, RPC WebSocket endpoints, and block-explorer base URLs
 that are currently hardcoded and duplicated across the faucet, the bridge dapp,
 and the block-explorer. Consumers should import these constants instead of
@@ -54,7 +54,7 @@ environment carries it.
 
 | Field | Value | Provenance |
 |---|---|---|
-| `displayName` | `Cassandra - Predictor Public Testnet` | faucet `config.ts :: DEFAULT_CHAIN_NAME` |
+| `displayName` | `Cassandra - PRDCTR Public Testnet` | faucet `config.ts :: DEFAULT_CHAIN_NAME` |
 | `wsEndpoints[0]` | `wss://chain-external.testnet.prdctr.io` | faucet `chain.ts :: DEFAULT_WS_ENDPOINT` |
 | `explorerBaseUrl` | `https://explorer.testnet.prdctr.io` | faucet `config.ts :: DEFAULT_EXPLORER_URL` |
 
@@ -90,6 +90,6 @@ actually belongs to rather than collapsing them:
 
 - Ethereum-side bridge coordinates (chain id `11155111` = Sepolia, bridge/token
   contract addresses) live in the bridge dapp; they are the *other* side of the
-  bridge, not Predictor network coordinates.
+  bridge, not PRDCTR network coordinates.
 - On-chain storage paths (`tokenManager.avtTokenContract`, etc.) are runtime
   metadata lookups, not static network coordinates.

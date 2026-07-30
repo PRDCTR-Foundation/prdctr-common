@@ -96,7 +96,7 @@ export interface WsChainOptions extends ChainCommonOptions {
 export interface SmoldotChainConfig {
 	/**
 	 * The chain-spec JSON (as a string) smoldot syncs from - a spec carrying the genesis and bootnodes.
-	 * For the Predictor solo chain this is the whole story; a parachain would additionally need its relay
+	 * For the PRDCTR solo chain this is the whole story; a parachain would additionally need its relay
 	 * chain's spec (not modelled here yet).
 	 */
 	readonly chainSpec: string;

@@ -2,7 +2,7 @@
 # TEMPLATE: Subsquid processor (workspace build + `pnpm deploy` + query node)
 # Canonical shape B. Derived from:
 #   - block-explorer/packages/{account,explorer,stats}/Dockerfile  (single squid stage)
-#   - predictor-squids/packages/{node-manager,prediction-markets}/Dockerfile
+#   - prdctr-squids/packages/{node-manager,prediction-markets}/Dockerfile
 #       (split processor + query-node stages)
 #
 # Use for: a Subsquid Substrate indexer built from the MONOREPO ROOT, that
@@ -25,7 +25,7 @@
 # Optional blocks are fenced with `# --- OPTIONAL: <name> ---` ... `# --- END ---`.
 # The two production-stage layouts are mutually exclusive - keep exactly one:
 #   LAYOUT 1 (block-explorer): one `squid` stage exposing 3000+4000.
-#   LAYOUT 2 (predictor-squids): split `processor` (3000) + `query-node` (4000).
+#   LAYOUT 2 (prdctr-squids): split `processor` (3000) + `query-node` (4000).
 # =============================================================================
 
 FROM {{NODE_TAG}} AS builder
@@ -41,7 +41,7 @@ RUN npm install -g pnpm@{{PNPM_VERSION}}
 # Copy workspace manifests first for cached dependency resolution.
 # .npmrc holds only the ${GITHUB_TOKEN} placeholder, not a secret.
 COPY --chown=node:node pnpm-workspace.yaml package.json pnpm-lock.yaml* .npmrc ./
-# --- OPTIONAL: shared tsconfig at repo root (predictor-squids) ---
+# --- OPTIONAL: shared tsconfig at repo root (prdctr-squids) ---
 COPY --chown=node:node tsconfig.base.json ./
 # --- END ---
 COPY --chown=node:node packages/{{PKG_DIR}}/package.json packages/{{PKG_DIR}}/package.json
@@ -99,7 +99,7 @@ EXPOSE 3000 4000
 CMD sh -c "node -r dotenv/config lib/main.js"
 
 # =============================================================================
-# LAYOUT 2 - split stages (predictor-squids). Build `--target processor` or
+# LAYOUT 2 - split stages (prdctr-squids). Build `--target processor` or
 # `--target query-node`. Delete LAYOUT 1 above if you use this.
 # =============================================================================
 FROM {{NODE_TAG}} AS processor

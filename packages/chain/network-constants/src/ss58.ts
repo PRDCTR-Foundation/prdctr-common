@@ -38,8 +38,8 @@ export function unsafeSs58Prefix(value: number): Ss58Prefix {
 }
 
 /**
- * The Predictor SS58 address format. Prefix `42` is the generic Substrate
- * format and is used identically across every Predictor surface.
+ * The PRDCTR SS58 address format. Prefix `42` is the generic Substrate
+ * format and is used identically across every PRDCTR surface.
  *
  * Provenance (all agree on 42):
  * - faucet/packages/backend/src/chain.ts :: `CHAIN.ss58Prefix`

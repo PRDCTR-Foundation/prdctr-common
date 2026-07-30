@@ -1,8 +1,8 @@
-<h1>Predictor Dockerfile templates</h1>
+<h1>PRDCTR Dockerfile templates</h1>
 
 <p>
   Reference / template Dockerfiles distilled from the near-identical images across
-  the Predictor repos. These are <strong>not a built package</strong> - copy a
+  the PRDCTR repos. These are <strong>not a built package</strong> - copy a
   template into a new service, fill the <code>{{PLACEHOLDER}}</code> tokens, and
   delete the <code># --- OPTIONAL --- ... # --- END ---</code> blocks that do not
   apply.
@@ -40,7 +40,7 @@
       <td><code>subsquid-processor.Dockerfile.template</code></td>
       <td>
         <code>block-explorer/packages/{account,explorer,stats}/Dockerfile</code>,
-        <code>predictor-squids/packages/{node-manager,prediction-markets}/Dockerfile</code>
+        <code>prdctr-squids/packages/{node-manager,prediction-markets}/Dockerfile</code>
       </td>
       <td>
         Built from the <strong>monorepo root</strong>. Private-scope
@@ -102,7 +102,7 @@
         to pick processor vs query node.
       </li>
       <li>
-        <em>predictor-squids</em>: two stages, <code>processor</code>
+        <em>prdctr-squids</em>: two stages, <code>processor</code>
         (<code>--target processor</code>, port 3000) and <code>query-node</code>
         (<code>npx squid-graphql-server --subscriptions</code>, port 4000).
       </li>
@@ -111,18 +111,18 @@
   <li>
     <strong>RDS TLS</strong> (<em>block-explorer</em>): downloads
     <code>global-bundle.pem</code> and sets the <code>DB_SSL*</code> /
-    <code>PGSSLMODE</code> env. predictor-squids keeps only
+    <code>PGSSLMODE</code> env. prdctr-squids keeps only
     <code>NODE_EXTRA_CA_CERTS</code> and no forced DB SSL.
   </li>
   <li>
     <strong>Shared workspace package</strong> (<em>block-explorer</em>):
     <code>packages/shared</code> (its <code>package.json</code>, source, and
-    <code>scripts/init-db.js</code>). predictor-squids has no shared package but
+    <code>scripts/init-db.js</code>). prdctr-squids has no shared package but
     copies <code>tsconfig.base.json</code>.
   </li>
   <li>
     <strong>pnpm version</strong>: block-explorer installs latest
-    (<code>npm i -g pnpm</code>); predictor-squids pins
+    (<code>npm i -g pnpm</code>); prdctr-squids pins
     <code>pnpm@10.29.2</code>.
   </li>
   <li>
@@ -133,7 +133,7 @@
     and passes <code>--max-old-space-size</code>).
   </li>
   <li>
-    <strong>Install filter</strong>: predictor-squids narrows the install with
+    <strong>Install filter</strong>: prdctr-squids narrows the install with
     <code>--filter &lt;pkg&gt;...</code>; block-explorer installs the whole
     workspace (with a <code>--frozen-lockfile || install</code> fallback and
     <code>--dangerously-allow-all-builds</code>).
