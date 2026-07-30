@@ -112,7 +112,7 @@ wallet provider) and should be extracted in a separate pass:
   candidates. Extraction needs the sort/pagination state modelled as sum types first.
 - **Wallet-connect UI** (bridge `src/App.tsx`): the Ethereum connect + PRDCTR
   (Polkadot extension) connect + account-selector controls (`connectEthereum`,
-  `connectPRDCTR`, the `InjectedAccountWithMeta` selector, connected-wallet
+  `connectPredictor`, the `InjectedAccountWithMeta` selector, connected-wallet
   persistence). Candidate for a shared `WalletConnectButton` / `AccountSelector` once
   decoupled from the bridge's balance/store logic and provider wiring.
 - **Status/feedback** (bridge + faucet both hand-roll an `idle | loading | success | error`
