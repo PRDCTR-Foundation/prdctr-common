@@ -95,10 +95,12 @@ jobs:
 
       - name: publish released packages
         env:
-          # The app installation token (packages:write) authenticates the publish;
-          # the auto-provided GITHUB_TOKEN cannot write packages first published
-          # outside the workflow.
-          NODE_AUTH_TOKEN: ${{ steps.app-token.outputs.token }}
+          # GITHUB_TOKEN, not the app installation token: GitHub Packages rejects installation
+          # tokens for package writes ("installation not allowed to Write organization package"),
+          # and package access can be granted to users, teams and repositories - never to an App.
+          # The workflow's packages:write applies because every package here is linked to this
+          # repository, which is what the earlier comment predated.
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           # Publish the exact tarball packed (and attested) above - not a fresh `pnpm publish` repack -
           # so the published artifact is byte-for-byte the one `gh attestation verify` will look up.
