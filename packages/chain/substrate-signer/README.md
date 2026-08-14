@@ -1,4 +1,4 @@
-# @predictor-foundation/substrate-signer
+# @prdctr-foundation/substrate-signer
 
 sr25519 key derivation and address/public-key helpers for the Predictor Foundation PAPI services.
 
@@ -11,7 +11,7 @@ password into the mini-secret, so parsing it as a path would silently derive a *
 ## Install
 
 ```bash
-pnpm add @predictor-foundation/substrate-signer
+pnpm add @prdctr-foundation/substrate-signer
 # peers (the PAPI signing + hd-key-derivation stack)
 pnpm add polkadot-api @polkadot-labs/hdkd @polkadot-labs/hdkd-helpers @polkadot-api/substrate-bindings
 ```
@@ -27,7 +27,7 @@ pnpm add polkadot-api @polkadot-labs/hdkd @polkadot-labs/hdkd-helpers @polkadot-
 | `AccountUtils` | `addressToPublicKey`, `addressToPublicKeyBytes`, `publicKeyToAddress`, `isAccountPK`, `convertToAddress`, `convertToPublicKeyIfNeeded`, `convertToPublicKeyBytes`, `generateNewAccount`, `addressFromSuri`. |
 
 ```ts
-import { deriveKeypair, AccountUtils } from "@predictor-foundation/substrate-signer";
+import { deriveKeypair, AccountUtils } from "@prdctr-foundation/substrate-signer";
 
 const alice = deriveKeypair("//Alice");
 const pubkey = AccountUtils.addressToPublicKey(alice.address);

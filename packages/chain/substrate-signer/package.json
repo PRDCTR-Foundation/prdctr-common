@@ -1,5 +1,5 @@
 {
-	"name": "@predictor-foundation/substrate-signer",
+	"name": "@prdctr-foundation/substrate-signer",
 	"version": "0.1.4",
 	"description": "sr25519 key derivation (parseSuri/deriveKeypair) + address/public-key helpers for the Predictor Foundation PAPI services",
 	"license": "UNLICENSED",
@@ -36,8 +36,8 @@
 		"clean": "rm -rf lib *.tsbuildinfo"
 	},
 	"dependencies": {
-		"@predictor-foundation/scale": "workspace:*",
-		"@predictor-foundation/substrate-primitives": "workspace:*"
+		"@prdctr-foundation/scale": "workspace:*",
+		"@prdctr-foundation/substrate-primitives": "workspace:*"
 	},
 	"peerDependencies": {
 		"@polkadot-api/substrate-bindings": "^0.20.3",

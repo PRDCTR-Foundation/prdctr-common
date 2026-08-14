@@ -1,5 +1,5 @@
 {
-	"name": "@predictor-foundation/papi-chain",
+	"name": "@prdctr-foundation/papi-chain",
 	"version": "0.1.5",
 	"description": "Descriptor-generic polkadot-api chain boundary (connect, timed reads, signed/unsigned submit) for the Predictor Foundation services",
 	"license": "UNLICENSED",
@@ -36,7 +36,7 @@
 		"clean": "rm -rf lib *.tsbuildinfo"
 	},
 	"dependencies": {
-		"@predictor-foundation/chain-errors": "workspace:*"
+		"@prdctr-foundation/chain-errors": "workspace:*"
 	},
 	"peerDependencies": {
 		"polkadot-api": "^2.1.7"

@@ -1,4 +1,4 @@
-<h1>@predictor-foundation/graphql-client</h1>
+<h1>@prdctr-foundation/graphql-client</h1>
 
 <p>
 	A framework-light GraphQL-over-HTTP client for Predictor Foundation
@@ -11,17 +11,17 @@
 <h2>Why two entry points</h2>
 
 <p>
-	The core (<code>@predictor-foundation/graphql-client</code>) imports no React
+	The core (<code>@prdctr-foundation/graphql-client</code>) imports no React
 	and no SWR, so non-React consumers (scripts, other packages, a dApp's plain
 	data layer) do not pull them in. The React hooks live behind a separate
-	subpath (<code>@predictor-foundation/graphql-client/react</code>);
+	subpath (<code>@prdctr-foundation/graphql-client/react</code>);
 	<code>react</code> and <code>swr</code> are <em>optional peer
 	dependencies</em>, needed only if you import that subpath.
 </p>
 
 <h2>Export surface</h2>
 
-<h3><code>@predictor-foundation/graphql-client</code> (core, framework-free)</h3>
+<h3><code>@prdctr-foundation/graphql-client</code> (core, framework-free)</h3>
 
 <ul>
 	<li><code>fetchGraphql&lt;T&gt;(request: GraphqlRequest): Promise&lt;T&gt;</code> &mdash; POST a query, return its <code>data</code>.</li>
@@ -33,7 +33,7 @@
 	<li><code>paginationToConnectionCursor</code>, <code>extractConnectionItems</code>, <code>emptyItemsResponse</code>, <code>DEFAULT_PAGE_SIZE</code> &mdash; connection-to-page mapping.</li>
 </ul>
 
-<h3><code>@predictor-foundation/graphql-client/react</code> (optional)</h3>
+<h3><code>@prdctr-foundation/graphql-client/react</code> (optional)</h3>
 
 <ul>
 	<li><code>useResource(fetchItem, args, options?)</code> &rarr; <code>Resource&lt;T&gt;</code></li>
@@ -61,7 +61,7 @@
 	extractConnectionItems,
 	paginationToConnectionCursor,
 	type ItemsConnection,
-} from "@predictor-foundation/graphql-client";
+} from "@prdctr-foundation/graphql-client";
 
 const fragments = new FragmentRegistry().registerConnectionFragment(
 	"eventFields",
@@ -92,7 +92,7 @@ async function fetchEvents(url: string, page: number) {
 
 <h2>Usage &mdash; React</h2>
 
-<pre><code>import { useResource } from "@predictor-foundation/graphql-client/react";
+<pre><code>import { useResource } from "@prdctr-foundation/graphql-client/react";
 
 function Event({ url, id }: { url: string; id: string }) {
 	const resource = useResource(fetchEvent, [url, id]);

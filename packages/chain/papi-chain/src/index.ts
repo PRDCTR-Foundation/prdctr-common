@@ -1,6 +1,6 @@
 // The single boundary between a service and polkadot-api. Everything that touches the network lives
 // here, so this is the only place that produces raw PAPI/WS errors - and therefore the only place
-// that classifies them (via @predictor-foundation/chain-errors).
+// that classifies them (via @prdctr-foundation/chain-errors).
 //
 // Two entry points:
 //   - ChainBase  - the connection + submit plumbing WITHOUT typed descriptors. Consumers that read
@@ -15,7 +15,7 @@ import {
 	PermanentChainError,
 	RetryableError,
 	withTimeout,
-} from "@predictor-foundation/chain-errors";
+} from "@prdctr-foundation/chain-errors";
 import {
 	type ChainDefinition,
 	createClient,

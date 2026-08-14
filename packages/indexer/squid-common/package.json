@@ -1,5 +1,5 @@
 {
-	"name": "@predictor-foundation/squid-common",
+	"name": "@prdctr-foundation/squid-common",
 	"version": "1.5.1",
 	"description": "Shared Subsquid building blocks: env parsing, SS58 codec, account upsert/caching, entity cache, processor builder, branded primitives",
 	"license": "UNLICENSED",

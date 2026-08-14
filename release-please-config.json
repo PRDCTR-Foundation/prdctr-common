@@ -8,92 +8,92 @@
 	"packages": {
 		"packages/chain/scale": {
 			"release-type": "node",
-			"package-name": "@predictor-foundation/scale",
+			"package-name": "@prdctr-foundation/scale",
 			"component": "scale"
 		},
 		"packages/chain/substrate-primitives": {
 			"release-type": "node",
-			"package-name": "@predictor-foundation/substrate-primitives",
+			"package-name": "@prdctr-foundation/substrate-primitives",
 			"component": "substrate-primitives"
 		},
 		"packages/chain/chain-errors": {
 			"release-type": "node",
-			"package-name": "@predictor-foundation/chain-errors",
+			"package-name": "@prdctr-foundation/chain-errors",
 			"component": "chain-errors"
 		},
 		"packages/chain/substrate-signer": {
 			"release-type": "node",
-			"package-name": "@predictor-foundation/substrate-signer",
+			"package-name": "@prdctr-foundation/substrate-signer",
 			"component": "substrate-signer"
 		},
 		"packages/chain/node-manager": {
 			"release-type": "node",
-			"package-name": "@predictor-foundation/node-manager",
+			"package-name": "@prdctr-foundation/node-manager",
 			"component": "node-manager"
 		},
 		"packages/chain/papi-chain": {
 			"release-type": "node",
-			"package-name": "@predictor-foundation/papi-chain",
+			"package-name": "@prdctr-foundation/papi-chain",
 			"component": "papi-chain"
 		},
 		"packages/web/design-system": {
 			"release-type": "node",
-			"package-name": "@predictor-foundation/design-system",
+			"package-name": "@prdctr-foundation/design-system",
 			"component": "design-system"
 		},
 		"packages/tooling/e2e": {
 			"release-type": "node",
-			"package-name": "@predictor-foundation/e2e",
+			"package-name": "@prdctr-foundation/e2e",
 			"component": "e2e"
 		},
 		"packages/web/ui": {
 			"release-type": "node",
-			"package-name": "@predictor-foundation/ui",
+			"package-name": "@prdctr-foundation/ui",
 			"component": "ui"
 		},
 		"packages/indexer/squid-common": {
 			"release-type": "node",
-			"package-name": "@predictor-foundation/squid-common",
+			"package-name": "@prdctr-foundation/squid-common",
 			"component": "squid-common"
 		},
 		"packages/tooling/tsconfig": {
 			"release-type": "node",
-			"package-name": "@predictor-foundation/tsconfig",
+			"package-name": "@prdctr-foundation/tsconfig",
 			"component": "tsconfig"
 		},
 		"packages/tooling/biome-config": {
 			"release-type": "node",
-			"package-name": "@predictor-foundation/biome-config",
+			"package-name": "@prdctr-foundation/biome-config",
 			"component": "biome-config"
 		},
 		"packages/tooling/git-hooks": {
 			"release-type": "node",
-			"package-name": "@predictor-foundation/git-hooks",
+			"package-name": "@prdctr-foundation/git-hooks",
 			"component": "git-hooks"
 		},
 		"packages/chain/network-constants": {
 			"release-type": "node",
-			"package-name": "@predictor-foundation/network-constants",
+			"package-name": "@prdctr-foundation/network-constants",
 			"component": "network-constants"
 		},
 		"packages/service/logger": {
 			"release-type": "node",
-			"package-name": "@predictor-foundation/logger",
+			"package-name": "@prdctr-foundation/logger",
 			"component": "logger"
 		},
 		"packages/service/env": {
 			"release-type": "node",
-			"package-name": "@predictor-foundation/env",
+			"package-name": "@prdctr-foundation/env",
 			"component": "env"
 		},
 		"packages/service/service-runtime": {
 			"release-type": "node",
-			"package-name": "@predictor-foundation/service-runtime",
+			"package-name": "@prdctr-foundation/service-runtime",
 			"component": "service-runtime"
 		},
 		"packages/web/graphql-client": {
 			"release-type": "node",
-			"package-name": "@predictor-foundation/graphql-client",
+			"package-name": "@prdctr-foundation/graphql-client",
 			"component": "graphql-client"
 		}
 	},

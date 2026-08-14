@@ -17,7 +17,7 @@ const isCI = Boolean(process.env.CI);
  * Opinionated Playwright config with PRDCTR defaults baked in, so a consumer
  * repo needs only:
  *
- *   import { definePlaywrightConfig, server } from "@predictor-foundation/e2e";
+ *   import { definePlaywrightConfig, server } from "@prdctr-foundation/e2e";
  *   export default definePlaywrightConfig({ webServer: [server({...})] });
  */
 export function definePlaywrightConfig(opts: E2EConfigOptions = {}): PlaywrightTestConfig {

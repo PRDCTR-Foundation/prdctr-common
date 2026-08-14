@@ -1,4 +1,4 @@
-# @predictor-foundation/substrate-primitives
+# @prdctr-foundation/substrate-primitives
 
 Branded Substrate primitives for the Predictor Foundation: a validated SS58 address and a
 non-negative balance, each mintable only through a guard so "validated" is enforced by the type
@@ -7,7 +7,7 @@ system rather than by convention (parse, don't validate).
 ## Install
 
 ```bash
-pnpm add @predictor-foundation/substrate-primitives
+pnpm add @prdctr-foundation/substrate-primitives
 # provide the peer dependency (the PAPI ecosystem's SS58 codec)
 pnpm add @polkadot-api/substrate-bindings
 ```
@@ -27,7 +27,7 @@ copy of it.
 | `asPlanck(value)` | `Planck` - throws `RangeError` on a negative amount. |
 
 ```ts
-import { parseSs58, assertSs58, asPlanck } from "@predictor-foundation/substrate-primitives";
+import { parseSs58, assertSs58, asPlanck } from "@prdctr-foundation/substrate-primitives";
 
 const addr = parseSs58(userInput);          // Ss58Address | null
 const oracle = assertSs58(config.oracle);   // Ss58Address (throws if malformed)

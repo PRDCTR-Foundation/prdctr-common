@@ -59,7 +59,7 @@ importers:
 
   packages/chain/node-manager:
     dependencies:
-      '@predictor-foundation/scale':
+      '@prdctr-foundation/scale':
         specifier: workspace:*
         version: link:../scale
     devDependencies:
@@ -75,7 +75,7 @@ importers:
 
   packages/chain/papi-chain:
     dependencies:
-      '@predictor-foundation/chain-errors':
+      '@prdctr-foundation/chain-errors':
         specifier: workspace:*
         version: link:../chain-errors
     devDependencies:
@@ -115,10 +115,10 @@ importers:
 
   packages/chain/substrate-signer:
     dependencies:
-      '@predictor-foundation/scale':
+      '@prdctr-foundation/scale':
         specifier: workspace:*
         version: link:../scale
-      '@predictor-foundation/substrate-primitives':
+      '@prdctr-foundation/substrate-primitives':
         specifier: workspace:*
         version: link:../substrate-primitives
     devDependencies:
@@ -196,7 +196,7 @@ importers:
 
   packages/service/service-runtime:
     dependencies:
-      '@predictor-foundation/logger':
+      '@prdctr-foundation/logger':
         specifier: workspace:*
         version: link:../logger
     devDependencies:

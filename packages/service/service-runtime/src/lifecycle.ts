@@ -1,4 +1,4 @@
-import { logger as defaultLogger, type Logger } from "@predictor-foundation/logger";
+import { logger as defaultLogger, type Logger } from "@prdctr-foundation/logger";
 
 // Graceful-shutdown wiring, extracted from the identical SIGINT/SIGTERM handler
 // blocks in heartbeat-service/src/index.ts and faucet/packages/backend/src/index.ts.

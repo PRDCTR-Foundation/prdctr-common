@@ -7,7 +7,7 @@ bundle in three lines and inherit the family's conventions for free.
 ## Packages
 
 Packages live under `packages/<group>/<package>`, grouped by the layer they
-serve. Consumers install by package name (`@predictor-foundation/<name>`); the
+serve. Consumers install by package name (`@prdctr-foundation/<name>`); the
 folder grouping is for humans, not resolution.
 
 ### `tooling/` - shared build, lint & test setup (dev dependencies)
@@ -58,15 +58,15 @@ folder grouping is for humans, not resolution.
 ```bash
 # 1. Add .npmrc at repo root (copy from .npmrc.example here)
 cat > .npmrc <<'EOF'
-@predictor-foundation:registry=https://npm.pkg.github.com
+@prdctr-foundation:registry=https://npm.pkg.github.com
 //npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}
 EOF
 
 # 2. Install the dev bundle
 pnpm add -D \
-  @predictor-foundation/tsconfig \
-  @predictor-foundation/biome-config \
-  @predictor-foundation/git-hooks \
+  @prdctr-foundation/tsconfig \
+  @prdctr-foundation/biome-config \
+  @prdctr-foundation/git-hooks \
   typescript
 ```
 
@@ -84,17 +84,17 @@ Then drop in three small config files:
 
 ```json
 // tsconfig.json
-{ "extends": "@predictor-foundation/tsconfig/node" }
+{ "extends": "@prdctr-foundation/tsconfig/node" }
 ```
 
 ```json
 // biome.json
-{ "extends": ["@predictor-foundation/biome-config/base"] }
+{ "extends": ["@prdctr-foundation/biome-config/base"] }
 ```
 
-Subsquid repos extend `@predictor-foundation/tsconfig/subsquid` and
-`@predictor-foundation/biome-config/subsquid` instead, and add
-`@predictor-foundation/squid-common` as a runtime dep.
+Subsquid repos extend `@prdctr-foundation/tsconfig/subsquid` and
+`@prdctr-foundation/biome-config/subsquid` instead, and add
+`@prdctr-foundation/squid-common` as a runtime dep.
 
 ## Repo conventions
 
@@ -103,8 +103,8 @@ Subsquid repos extend `@predictor-foundation/tsconfig/subsquid` and
 - **Releases:** [release-please](https://github.com/googleapis/release-please)
   in manifest mode. Each PR's conventional-commit scope drives which
   package(s) bump on the next release.
-- **Lint/format:** Biome, dogfood-extending `@predictor-foundation/biome-config/base`.
-- **TypeScript:** dogfood-extending `@predictor-foundation/tsconfig/base`.
+- **Lint/format:** Biome, dogfood-extending `@prdctr-foundation/biome-config/base`.
+- **TypeScript:** dogfood-extending `@prdctr-foundation/tsconfig/base`.
 - **Dependency versions:** shared third-party versions (`typescript`, `@types/node`,
   `polkadot-api`, `@polkadot-*`, `zod`) live in the `catalog:` block of
   `pnpm-workspace.yaml`. Every package references `catalog:` instead of a literal
@@ -113,7 +113,7 @@ Subsquid repos extend `@predictor-foundation/tsconfig/subsquid` and
 - **Supply-chain cooldown:** a third-party version must be public for 24h
   (`minimumReleaseAge`) before it can install, and no dependency may run install
   lifecycle scripts unless listed in `onlyBuiltDependencies` (empty by default).
-  Our own `@predictor-foundation/*` scope is excluded from the cooldown. Requires
+  Our own `@prdctr-foundation/*` scope is excluded from the cooldown. Requires
   pnpm 10 (pinned via `packageManager`).
 
 ## Development

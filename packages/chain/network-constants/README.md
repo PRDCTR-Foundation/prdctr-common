@@ -1,4 +1,4 @@
-# @predictor-foundation/network-constants
+# @prdctr-foundation/network-constants
 
 Single source of truth for **PRDCTR network coordinates** - the SS58 prefix,
 token decimals/symbol, RPC WebSocket endpoints, and block-explorer base URLs
@@ -28,7 +28,7 @@ import {
   PREDICTOR_SS58_PREFIX,
   primaryWsEndpoint,
   explorerExtrinsicUrl,
-} from "@predictor-foundation/network-constants";
+} from "@prdctr-foundation/network-constants";
 
 const ws = primaryWsEndpoint(PREDICTOR_TESTNET); // wss://chain-external.testnet.prdctr.io
 const url = explorerExtrinsicUrl(PREDICTOR_TESTNET, { block: 348030, index: 5 }, "events");

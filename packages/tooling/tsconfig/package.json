@@ -1,5 +1,5 @@
 {
-	"name": "@predictor-foundation/tsconfig",
+	"name": "@prdctr-foundation/tsconfig",
 	"version": "0.4.3",
 	"description": "Shared TypeScript config presets for the Predictor Foundation",
 	"license": "UNLICENSED",

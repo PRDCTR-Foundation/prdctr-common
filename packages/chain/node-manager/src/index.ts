@@ -3,7 +3,7 @@
 // the only thing that keeps a submitter (heartbeat-service) and an SDK (prdctr-sdk) from drifting
 // apart and producing signatures the chain rejects.
 
-import { concatBytes, scaleBytes, u64le, utf8 } from "@predictor-foundation/scale";
+import { concatBytes, scaleBytes, u64le, utf8 } from "@prdctr-foundation/scale";
 
 /**
  * The signature context the node-manager pallet checks. The signed payload is

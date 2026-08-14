@@ -49,7 +49,7 @@ COPY --chown=node:node packages/{{PKG_DIR}}/package.json packages/{{PKG_DIR}}/pa
 COPY --chown=node:node packages/shared/package.json packages/shared/package.json
 # --- END ---
 
-# GitHub Packages auth for @predictor-foundation, scoped to this step only.
+# GitHub Packages auth for @prdctr-foundation, scoped to this step only.
 RUN --mount=type=secret,id=github_token,env=GITHUB_TOKEN \
     pnpm install --frozen-lockfile --filter {{PKG_FILTER}}...
 

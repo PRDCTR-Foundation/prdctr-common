@@ -1,5 +1,5 @@
 {
-	"name": "@predictor-foundation/node-manager",
+	"name": "@prdctr-foundation/node-manager",
 	"version": "0.1.4",
 	"description": "Client-side contracts for the node-manager pallet (heartbeat signing payload) for the Predictor Foundation",
 	"license": "UNLICENSED",
@@ -35,7 +35,7 @@
 		"clean": "rm -rf lib *.tsbuildinfo"
 	},
 	"dependencies": {
-		"@predictor-foundation/scale": "workspace:*"
+		"@prdctr-foundation/scale": "workspace:*"
 	},
 	"devDependencies": {
 		"@polkadot-api/substrate-bindings": "catalog:",

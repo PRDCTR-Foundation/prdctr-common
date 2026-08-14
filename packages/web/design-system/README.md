@@ -1,4 +1,4 @@
-# @predictor-foundation/design-system
+# @prdctr-foundation/design-system
 
 The shared **PRDCTR** look and feel: design tokens + a Material-UI theme, dark-native
 with the pale ice-blue `#e3effd` accent and the Syne / Inter / DM Mono type ramp. Lifted
@@ -7,7 +7,7 @@ from the block-explorer frontend so every Predictor Foundation frontend renders 
 ## Install
 
 ```bash
-GITHUB_TOKEN=$(gh auth token) pnpm add @predictor-foundation/design-system
+GITHUB_TOKEN=$(gh auth token) pnpm add @prdctr-foundation/design-system
 ```
 
 Requires peers: `react`, `@mui/material`, `@emotion/react`, `@emotion/styled`.
@@ -16,8 +16,8 @@ Requires peers: `react`, `@mui/material`, `@emotion/react`, `@emotion/styled`.
 
 ```tsx
 import { CssBaseline, ThemeProvider } from "@mui/material";
-import { theme } from "@predictor-foundation/design-system";
-import "@predictor-foundation/design-system/styles.css"; // font imports + body reset
+import { theme } from "@prdctr-foundation/design-system";
+import "@prdctr-foundation/design-system/styles.css"; // font imports + body reset
 
 createRoot(el).render(
 	<ThemeProvider theme={theme}>
@@ -36,7 +36,7 @@ themed `css` callbacks are type-safe with zero extra setup.
 - `theme` - the Material-UI theme.
 - `predictorTokens` - the raw colour tokens (`primary`, `background`, `card`, …).
 - `fontFamilies` - the display / body / mono font stacks.
-- `@predictor-foundation/design-system/styles.css` - Google-Fonts imports + body reset.
+- `@prdctr-foundation/design-system/styles.css` - Google-Fonts imports + body reset.
 
 ## Consumers
 

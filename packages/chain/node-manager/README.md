@@ -1,4 +1,4 @@
-# @predictor-foundation/node-manager
+# @prdctr-foundation/node-manager
 
 Client-side contracts for the **node-manager pallet**, shared across the Predictor Foundation PAPI
 services.
@@ -18,7 +18,7 @@ they are added.
 | `heartbeatSigningPayload({ count, period })` | SCALE-encode `context ++ u64(count) ++ u64(period)`. Named object so the two u64s cannot be swapped. |
 
 ```ts
-import { heartbeatSigningPayload } from "@predictor-foundation/node-manager";
+import { heartbeatSigningPayload } from "@prdctr-foundation/node-manager";
 
 const payload = heartbeatSigningPayload({ count: 3n, period: 7n });
 const signature = keypair.sign(payload); // embed in the unsigned heartbeat extrinsic

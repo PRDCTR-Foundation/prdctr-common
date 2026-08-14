@@ -1,5 +1,5 @@
 {
-	"name": "@predictor-foundation/logger",
+	"name": "@prdctr-foundation/logger",
 	"version": "0.1.3",
 	"description": "Tiny dependency-free structured JSON-lines logger (level-filtered, stdout/stderr split) for the Predictor Foundation services",
 	"license": "UNLICENSED",
