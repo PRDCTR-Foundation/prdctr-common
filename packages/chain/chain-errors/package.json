@@ -1,5 +1,5 @@
 {
-	"name": "@predictor-foundation/chain-errors",
+	"name": "@prdctr-foundation/chain-errors",
 	"version": "0.1.4",
 	"description": "Chain-boundary error taxonomy (RetryableError / PermanentChainError / classifyChainError) + retry/backoff for the Predictor Foundation PAPI services",
 	"license": "UNLICENSED",

@@ -1,4 +1,4 @@
-# @predictor-foundation/logger
+# @prdctr-foundation/logger
 
 Tiny, dependency-free structured logger for Predictor Foundation services. Emits
 one JSON object per line, splits `warn`/`error` to stderr and `debug`/`info` to
@@ -12,7 +12,7 @@ package only defines the shared `Logger` contract they can also satisfy.
 ## Usage
 
 ```ts
-import { createLogger } from "@predictor-foundation/logger";
+import { createLogger } from "@prdctr-foundation/logger";
 
 const logger = createLogger({ level: "info", base: { service: "heartbeat" } });
 

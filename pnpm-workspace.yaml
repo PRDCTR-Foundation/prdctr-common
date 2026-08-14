@@ -7,7 +7,7 @@ packages:
 # Our own scoped packages are excluded so an urgent internal fix is not delayed.
 minimumReleaseAge: 1440
 minimumReleaseAgeExclude:
-  - '@predictor-foundation/*'
+  - '@prdctr-foundation/*'
 
 # No dependency may run install/postinstall lifecycle scripts unless it is listed here
 # (the primary execution vector in the 2025 npm worms). Empty = none are trusted; add a

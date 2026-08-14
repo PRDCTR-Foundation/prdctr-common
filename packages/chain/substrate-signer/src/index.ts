@@ -10,12 +10,12 @@ import {
 	mnemonicToEntropy,
 	ss58Address,
 } from "@polkadot-labs/hdkd-helpers";
-import { fromHex, toHex } from "@predictor-foundation/scale";
+import { fromHex, toHex } from "@prdctr-foundation/scale";
 import {
 	assertSs58,
 	PRD_SS58_PREFIX,
 	type Ss58Address,
-} from "@predictor-foundation/substrate-primitives";
+} from "@prdctr-foundation/substrate-primitives";
 import { getPolkadotSigner, type PolkadotSigner } from "polkadot-api/signer";
 
 /**

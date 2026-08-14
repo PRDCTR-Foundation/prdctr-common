@@ -1,14 +1,14 @@
-# @predictor-foundation/ui
+# @prdctr-foundation/ui
 
 App-agnostic React UI components shared across Predictor Foundation frontends,
 lifted from the block-explorer. Pairs with
-[`@predictor-foundation/design-system`](../design-system) (theme + tokens) - use both
+[`@prdctr-foundation/design-system`](../design-system) (theme + tokens) - use both
 together so components are themed correctly.
 
 ## Install
 
 ```bash
-GITHUB_TOKEN=$(gh auth token) pnpm add @predictor-foundation/ui
+GITHUB_TOKEN=$(gh auth token) pnpm add @prdctr-foundation/ui
 ```
 
 Peers: `react`, `react-dom`, `@mui/material`, `@emotion/react`, `@emotion/styled`,
@@ -44,9 +44,9 @@ so nothing assumes a single chain or a single token scale.
 | `formatDuration` | `./duration` | Milliseconds to coarse human span (`"24 hours"`, `"5 minutes"`) |
 
 ```ts
-import { truncateMiddle } from "@predictor-foundation/ui/truncate";
-import { isEncodedAddress } from "@predictor-foundation/ui/address";
-import { parseTokenAmount, formatTokenAmount } from "@predictor-foundation/ui/amount";
+import { truncateMiddle } from "@prdctr-foundation/ui/truncate";
+import { isEncodedAddress } from "@prdctr-foundation/ui/address";
+import { parseTokenAmount, formatTokenAmount } from "@prdctr-foundation/ui/amount";
 
 truncateMiddle("0x1234567890abcdef"); // "0x1234…abcdef"
 
@@ -61,7 +61,7 @@ The address and amount utilities carry no domain types: they take an SS58
 `Network` object, so any frontend can pass its own config in.
 
 ```tsx
-import { Card, CopyToClipboardButton, Link } from "@predictor-foundation/ui";
+import { Card, CopyToClipboardButton, Link } from "@prdctr-foundation/ui";
 
 <Card>
 	<Link to="/somewhere">Go</Link>
@@ -70,7 +70,7 @@ import { Card, CopyToClipboardButton, Link } from "@predictor-foundation/ui";
 ```
 
 `Link`/`ButtonLink` require a `react-router-dom` Router in the tree. The icon font for
-`MaterialSymbol` ships with `@predictor-foundation/design-system/styles.css`.
+`MaterialSymbol` ships with `@prdctr-foundation/design-system/styles.css`.
 
 ## Subpath imports
 
@@ -78,13 +78,13 @@ Each component is also exposed on its own subpath, so a consumer can pull in exa
 what it needs without the barrel pulling in unrelated components:
 
 ```tsx
-import { MaterialSymbol } from "@predictor-foundation/ui/MaterialSymbol";
-import { CopyToClipboardButton } from "@predictor-foundation/ui/CopyToClipboardButton";
+import { MaterialSymbol } from "@prdctr-foundation/ui/MaterialSymbol";
+import { CopyToClipboardButton } from "@prdctr-foundation/ui/CopyToClipboardButton";
 ```
 
 This matters for router-less apps (e.g. the faucet): importing a leaf subpath never
 reaches `Link`/`ButtonLink`, so `react-router-dom` is not needed even at build time.
-The barrel (`from "@predictor-foundation/ui"`) tree-shakes the same way for bundlers
+The barrel (`from "@prdctr-foundation/ui"`) tree-shakes the same way for bundlers
 that support it; the subpaths make the guarantee explicit and bundler-independent.
 
 Available subpaths: `./ButtonLink`, `./Card`, `./CopyToClipboardButton`, `./Currency`,

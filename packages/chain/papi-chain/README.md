@@ -1,9 +1,9 @@
-# @predictor-foundation/papi-chain
+# @prdctr-foundation/papi-chain
 
 The single, descriptor-generic **network boundary** between a Predictor Foundation service and
 `polkadot-api`. Everything that touches the chain lives here, so this is the only place that produces
 raw PAPI/WS errors - and therefore the only place that classifies them (via
-[`@predictor-foundation/chain-errors`](../chain-errors)).
+[`@prdctr-foundation/chain-errors`](../chain-errors)).
 
 ## Descriptor-generic
 
@@ -13,7 +13,7 @@ package ships no descriptors and is pinned to no runtime version - while `chain.
 the consumer's fully-typed `TypedApi<D>`.
 
 ```ts
-import { Chain } from "@predictor-foundation/papi-chain";
+import { Chain } from "@prdctr-foundation/papi-chain";
 import { prd } from "@polkadot-api/descriptors"; // the consumer's own generated descriptors
 
 const chain = new Chain(prd, { endpoint: "wss://rpc.predictor.io" });
@@ -74,7 +74,7 @@ The trade-off is a warmup sync and higher in-process resource use, plus a weaker
 ## Install
 
 ```bash
-pnpm add @predictor-foundation/papi-chain
+pnpm add @prdctr-foundation/papi-chain
 pnpm add polkadot-api   # peer
 ```
 

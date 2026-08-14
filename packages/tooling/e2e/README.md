@@ -1,4 +1,4 @@
-# @predictor-foundation/e2e
+# @prdctr-foundation/e2e
 
 Zero-setup Playwright harness. A consumer repo gets PRDCTR's E2E defaults
 (reporters, retries, traces, browser projects, server orchestration) and the
@@ -7,7 +7,7 @@ Playwright test API from a single import - no boilerplate.
 ## Install
 
 ```bash
-GITHUB_TOKEN=$(gh auth token) pnpm add -D @predictor-foundation/e2e @playwright/test
+GITHUB_TOKEN=$(gh auth token) pnpm add -D @prdctr-foundation/e2e @playwright/test
 pnpm exec playwright install chromium
 ```
 
@@ -16,7 +16,7 @@ pnpm exec playwright install chromium
 `playwright.config.ts`:
 
 ```ts
-import { definePlaywrightConfig, server } from "@predictor-foundation/e2e";
+import { definePlaywrightConfig, server } from "@prdctr-foundation/e2e";
 
 export default definePlaywrightConfig({
 	baseURL: "http://localhost:3000",

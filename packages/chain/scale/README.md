@@ -1,4 +1,4 @@
-# @predictor-foundation/scale
+# @prdctr-foundation/scale
 
 Minimal, dependency-free SCALE codec helpers for the Predictor Foundation.
 
@@ -11,7 +11,7 @@ package has **no runtime dependencies**; its tests pin the output against
 ## Install
 
 ```bash
-pnpm add @predictor-foundation/scale
+pnpm add @prdctr-foundation/scale
 ```
 
 ## API
@@ -27,7 +27,7 @@ pnpm add @predictor-foundation/scale
 | `fromHex(hex)` | Decode a hex string (with or without `0x`) to a `Uint8Array`. |
 
 ```ts
-import { compact, scaleBytes, u64le, utf8, concatBytes } from "@predictor-foundation/scale";
+import { compact, scaleBytes, u64le, utf8, concatBytes } from "@prdctr-foundation/scale";
 
 // e.g. a node-manager heartbeat signing payload: context ++ u64(count) ++ u64(period)
 const payload = concatBytes(scaleBytes(utf8("NodeManager_heartbeat")), u64le(3n), u64le(7n));

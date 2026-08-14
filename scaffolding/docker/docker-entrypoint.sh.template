@@ -10,7 +10,7 @@
 #
 # Fill: {{WINDOW_KEY}} (e.g. PREDICTOR_BRIDGE_CONFIG) and the KEY:${ENV:-default}
 # lines for your app. Defaults below are the bridge dapp's real values - replace
-# with yours, or import them from @predictor-foundation/network-constants at
+# with yours, or import them from @prdctr-foundation/network-constants at
 # build time instead of hardcoding.
 # =============================================================================
 set -eu

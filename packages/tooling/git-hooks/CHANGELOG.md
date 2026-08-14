@@ -34,7 +34,7 @@
 ### Features
 
 * initial commit ([ddaaee1](https://github.com/Predictor-Foundation/predictor-common/commit/ddaaee14670da0811238f185d8169cb1ec211424))
-* rename scope to [@predictor-foundation](https://github.com/predictor-foundation) for Predictor-Foundation org ([b025c4e](https://github.com/Predictor-Foundation/predictor-common/commit/b025c4e49625fb2286291b66f2ab3e856802993e))
+* rename scope to [@prdctr-foundation](https://github.com/predictor-foundation) for Predictor-Foundation org ([b025c4e](https://github.com/Predictor-Foundation/predictor-common/commit/b025c4e49625fb2286291b66f2ab3e856802993e))
 
 
 ### Bug Fixes
@@ -50,7 +50,7 @@
 ### Features
 
 * initial commit ([ddaaee1](https://github.com/Predictor-Foundation/predictor-common/commit/ddaaee14670da0811238f185d8169cb1ec211424))
-* rename scope to [@predictor-foundation](https://github.com/predictor-foundation) for Predictor-Foundation org ([b025c4e](https://github.com/Predictor-Foundation/predictor-common/commit/b025c4e49625fb2286291b66f2ab3e856802993e))
+* rename scope to [@prdctr-foundation](https://github.com/predictor-foundation) for Predictor-Foundation org ([b025c4e](https://github.com/Predictor-Foundation/predictor-common/commit/b025c4e49625fb2286291b66f2ab3e856802993e))
 
 
 ### Bug Fixes

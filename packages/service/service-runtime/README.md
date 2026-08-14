@@ -1,4 +1,4 @@
-# @predictor-foundation/service-runtime
+# @prdctr-foundation/service-runtime
 
 Building blocks for long-lived Node services (schedulers, workers, daemons):
 a health state machine, k8s-correct probe routes, a self-guarding tick loop, and
@@ -18,7 +18,7 @@ import {
 	registerHealthRoutes,
 	createTickLoop,
 	installGracefulShutdown,
-} from "@predictor-foundation/service-runtime";
+} from "@prdctr-foundation/service-runtime";
 
 const health = new HealthMonitor();
 

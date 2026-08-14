@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { PermanentChainError, RetryableError } from "@predictor-foundation/chain-errors";
+import { PermanentChainError, RetryableError } from "@prdctr-foundation/chain-errors";
 import type { ChainDefinition, PolkadotSigner } from "polkadot-api";
 import { Chain, ChainBase, type SignableTx } from "../src/index.ts";
 

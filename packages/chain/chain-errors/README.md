@@ -1,4 +1,4 @@
-# @predictor-foundation/chain-errors
+# @prdctr-foundation/chain-errors
 
 The chain-boundary error taxonomy and retry helpers shared by the Predictor Foundation PAPI
 services. **No runtime dependencies** - logging is injected via callbacks.
@@ -26,7 +26,7 @@ retry storm.
 | `withRetry(op, policy, hooks?)` | Retry while `op` throws `RetryableError`; `hooks.onAttempt`/`onRetry` observe progress. |
 
 ```ts
-import { withRetry, classifyChainError, type RetryPolicy } from "@predictor-foundation/chain-errors";
+import { withRetry, classifyChainError, type RetryPolicy } from "@prdctr-foundation/chain-errors";
 
 const policy: RetryPolicy = { maxRetries: 4, baseDelayMs: 250 };
 await withRetry(() => submit(), policy, {

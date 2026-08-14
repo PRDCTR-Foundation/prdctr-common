@@ -1,5 +1,5 @@
 {
-	"name": "@predictor-foundation/service-runtime",
+	"name": "@prdctr-foundation/service-runtime",
 	"version": "0.1.3",
 	"description": "Long-lived service runtime building blocks (health state machine, k8s probe routes, tick loop, graceful shutdown) for the Predictor Foundation Node services",
 	"license": "UNLICENSED",
@@ -27,7 +27,7 @@
 		"clean": "rm -rf lib *.tsbuildinfo"
 	},
 	"dependencies": {
-		"@predictor-foundation/logger": "workspace:*"
+		"@prdctr-foundation/logger": "workspace:*"
 	},
 	"peerDependencies": {
 		"fastify": "^5.0.0"

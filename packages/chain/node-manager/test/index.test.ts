@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
 import { u64 } from "@polkadot-api/substrate-bindings";
-import { scaleBytes, utf8 } from "@predictor-foundation/scale";
+import { scaleBytes, utf8 } from "@prdctr-foundation/scale";
 import { HEARTBEAT_CONTEXT, heartbeatSigningPayload } from "../src/index.ts";
 
 test('HEARTBEAT_CONTEXT is the pallet\'s b"NodeManager_heartbeat"', () => {

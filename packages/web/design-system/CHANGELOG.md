@@ -26,7 +26,7 @@
 
 ### Features
 
-* extract shared [@predictor-foundation](https://github.com/predictor-foundation) packages ([#13](https://github.com/Predictor-Foundation/predictor-common/issues/13)) ([5365264](https://github.com/Predictor-Foundation/predictor-common/commit/536526487c0aec091c2cff744d29d2369829c42c))
+* extract shared [@prdctr-foundation](https://github.com/predictor-foundation) packages ([#13](https://github.com/Predictor-Foundation/predictor-common/issues/13)) ([5365264](https://github.com/Predictor-Foundation/predictor-common/commit/536526487c0aec091c2cff744d29d2369829c42c))
 
 ## [0.1.2](https://github.com/Predictor-Foundation/predictor-common/compare/design-system-v0.1.1...design-system-v0.1.2) (2026-06-24)
 

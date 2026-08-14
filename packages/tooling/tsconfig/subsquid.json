@@ -1,6 +1,6 @@
 {
 	"$schema": "https://json.schemastore.org/tsconfig",
-	"display": "@predictor-foundation/tsconfig/subsquid",
+	"display": "@prdctr-foundation/tsconfig/subsquid",
 	"extends": "./node.json",
 	"compilerOptions": {
 		"experimentalDecorators": true,

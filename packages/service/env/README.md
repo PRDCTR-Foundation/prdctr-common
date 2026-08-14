@@ -1,4 +1,4 @@
-# @predictor-foundation/env
+# @prdctr-foundation/env
 
 Zod-based environment parsing primitives. Every PRDCTR service parses
 `process.env` the same way - "validate against a schema at boot, fail loud on
@@ -9,7 +9,7 @@ owns *how* env is parsed; your service owns *which* variables it reads.
 
 ```ts
 import { z } from "zod";
-import { parseEnv, requiredString, stringEnv, positiveIntEnv, portEnv } from "@predictor-foundation/env";
+import { parseEnv, requiredString, stringEnv, positiveIntEnv, portEnv } from "@prdctr-foundation/env";
 
 const Schema = z.object({
 	KEYS_FILE: requiredString(),

@@ -1,4 +1,4 @@
-# @predictor-foundation/git-hooks
+# @prdctr-foundation/git-hooks
 
 Opinionated husky-based git hooks. Two hooks, fixed behaviour, fast-fail
 on any failure:
@@ -39,7 +39,7 @@ the new steps on the next `pnpm install`.
 ## Setup
 
 ```bash
-pnpm add -D @predictor-foundation/git-hooks
+pnpm add -D @prdctr-foundation/git-hooks
 ```
 
 ```json

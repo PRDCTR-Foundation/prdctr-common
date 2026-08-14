@@ -5,7 +5,7 @@
   <strong>Scope:</strong> how to publish the generated
   <a href="https://papi.how">polkadot-api</a> (PAPI) <code>prd</code> descriptor
   set plus the committed chain metadata as one shared package, co-located with
-  <code>@predictor-foundation/papi-chain</code>, so every consumer stops
+  <code>@prdctr-foundation/papi-chain</code>, so every consumer stops
   regenerating its own copy.
 </p>
 
@@ -52,7 +52,7 @@
     <strong>Consumption.</strong> <code>chain.ts</code> imports
     <code>{ prd }</code> from <code>@polkadot-api/descriptors</code> and injects
     it into the descriptor-generic <code>Chain&lt;typeof prd&gt;</code> from
-    <code>@predictor-foundation/papi-chain</code>.
+    <code>@prdctr-foundation/papi-chain</code>.
     <code>papi-chain</code> deliberately <em>ships no descriptors</em> and is
     pinned to no runtime version - each consumer supplies its own <code>D</code>.
   </li>
@@ -78,7 +78,7 @@
     <code>polkadot-api.json</code> repeats the same
     <code>wss://chain-external.testnet.prdctr.io</code> that already lives in the
     faucet's <code>chain.ts</code> and now in
-    <code>@predictor-foundation/network-constants</code>.
+    <code>@prdctr-foundation/network-constants</code>.
   </li>
 </ul>
 
@@ -87,13 +87,13 @@
 <h3>Option 1 - Ship a prebuilt descriptors package (recommended)</h3>
 <p>
   Add a new workspace package,
-  <code>@predictor-foundation/papi-descriptors</code>, next to
+  <code>@prdctr-foundation/papi-descriptors</code>, next to
   <code>papi-chain</code>. It <strong>owns the committed
   <code>prd.scale</code></strong>, runs <code>papi</code> at
   <em>its own</em> build time, and publishes the <em>already-generated</em>
   descriptor <code>dist/</code> as normal package output (like every other
   <code>lib/</code> in the monorepo). Consumers depend on it and
-  <code>import { prd } from "@predictor-foundation/papi-descriptors"</code> -
+  <code>import { prd } from "@prdctr-foundation/papi-descriptors"</code> -
   no <code>papi</code> CLI, no <code>postinstall</code>, no
   <code>.papi/</code> folder, no Docker regeneration step.
 </p>
@@ -145,14 +145,14 @@
 
 <h2>3. Recommendation</h2>
 <p>
-  <strong>Option 1: a dedicated <code>@predictor-foundation/papi-descriptors</code>
+  <strong>Option 1: a dedicated <code>@prdctr-foundation/papi-descriptors</code>
   package.</strong> It keeps <code>papi-chain</code> generic (its secret is the
   connect/submit plumbing), gives the <code>prd</code> metadata a single owner,
   and turns every consumer into an ordinary import. Sketch:
 </p>
 
 <pre>packages/papi-descriptors/
-├── package.json        # name @predictor-foundation/papi-descriptors, main lib/index.js
+├── package.json        # name @prdctr-foundation/papi-descriptors, main lib/index.js
 ├── .papi/
 │   ├── polkadot-api.json   # the single committed prd entry (metadata + genesis + codeHash)
 │   └── metadata/prd.scale  # the ONE committed metadata blob for the whole org
@@ -171,7 +171,7 @@
     <strong>Endpoint reuse:</strong> the <code>wsUrl</code> in
     <code>polkadot-api.json</code> should match
     <code>PREDICTOR_TESTNET.wsEndpoints[0]</code> from
-    <code>@predictor-foundation/network-constants</code>. Keep
+    <code>@prdctr-foundation/network-constants</code>. Keep
     <code>network-constants</code> as the human-facing source of truth for the
     endpoint; <code>polkadot-api.json</code> only needs it for the (optional)
     <code>papi update</code> refresh-from-chain flow.
@@ -179,7 +179,7 @@
   <li>
     <strong>Migration for the faucet:</strong> replace its
     <code>file:.papi/descriptors</code> dependency and <code>postinstall</code>
-    with a dependency on <code>@predictor-foundation/papi-descriptors</code>;
+    with a dependency on <code>@prdctr-foundation/papi-descriptors</code>;
     delete its <code>.papi/</code> and the Docker regeneration block (shape A
     template's optional papi section then drops out entirely).
   </li>

@@ -1,5 +1,5 @@
 #!/usr/bin/env sh
-# This file is managed by @predictor-foundation/git-hooks.
+# This file is managed by @prdctr-foundation/git-hooks.
 # Do not edit by hand - bumps to the package overwrite this file on
 # the next `pnpm install`. To change the steps the hook runs, update
 # the package's `src/run.ts` and cut a release.

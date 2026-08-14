@@ -1,6 +1,6 @@
 {
 	"$schema": "https://json.schemastore.org/tsconfig",
-	"display": "@predictor-foundation/tsconfig/base",
+	"display": "@prdctr-foundation/tsconfig/base",
 	"compilerOptions": {
 		"target": "ES2022",
 		"module": "commonjs",
