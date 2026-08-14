@@ -3,6 +3,15 @@ name: release
 on:
   push:
     branches: [main]
+  # Recovery path: republish tags that release-please already cut but whose publish failed.
+  # Without this, a failed publish is unrecoverable without burning a version number, because
+  # `releases_created` is false on every subsequent run.
+  workflow_dispatch:
+    inputs:
+      paths:
+        description: 'Package paths to publish, as a JSON array. Empty publishes every package in release-please-config.json.'
+        required: false
+        default: ''
 
 permissions:
   contents: write
@@ -44,7 +53,7 @@ jobs:
 
   publish:
     needs: release-please
-    if: needs.release-please.outputs.releases_created == 'true'
+    if: needs.release-please.outputs.releases_created == 'true' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     steps:
       # Mint an installation token for package publishing. The app carries
@@ -73,9 +82,29 @@ jobs:
       - name: build
         run: pnpm -r build
 
-      - name: pack released packages
+      - name: resolve packages to publish
+        id: targets
         env:
           PATHS_RELEASED: ${{ needs.release-please.outputs.paths_released }}
+          INPUT_PATHS: ${{ inputs.paths }}
+        run: |
+          # A release supplies its own path list; a manual dispatch names them, or defaults to every
+          # configured package (the version each publishes is whatever is committed at this ref).
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            if [ -n "$INPUT_PATHS" ]; then
+              paths="$INPUT_PATHS"
+            else
+              paths=$(jq -c '[.packages | keys[]]' release-please-config.json)
+            fi
+          else
+            paths="$PATHS_RELEASED"
+          fi
+          echo "paths=$paths" >> "$GITHUB_OUTPUT"
+          echo "publishing: $paths"
+
+      - name: pack released packages
+        env:
+          PATHS_RELEASED: ${{ steps.targets.outputs.paths }}
         run: |
           # Pack each released package into .artifacts/ so the exact published tarball can be attested,
           # recording pkg_path -> tarball in a manifest the publish step reads back. The manifest is
@@ -95,16 +124,29 @@ jobs:
 
       - name: publish released packages
         env:
-          # GITHUB_TOKEN, not the app installation token: GitHub Packages rejects installation
-          # tokens for package writes ("installation not allowed to Write organization package"),
-          # and package access can be granted to users, teams and repositories - never to an App.
-          # The workflow's packages:write applies because every package here is linked to this
-          # repository, which is what the earlier comment predated.
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # A PAT, not GITHUB_TOKEN and not an App installation token. Both of those are refused by
+          # GitHub Packages here: the App token with "installation not allowed to Write organization
+          # package" (package access is grantable to users, teams and repositories, never to an App),
+          # and GITHUB_TOKEN with "permission_denied: write_package" - these packages are org-owned
+          # and do not inherit write access from the linked repository.
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
         run: |
           # Publish the exact tarball packed (and attested) above - not a fresh `pnpm publish` repack -
           # so the published artifact is byte-for-byte the one `gh attestation verify` will look up.
+          #
+          # An already-published version is treated as success: a run that fails partway leaves some
+          # packages published, and the recovery dispatch must be able to complete the rest without
+          # tripping over them.
+          failed=0
           while IFS=$'\t' read -r pkg_path tarball; do
             echo "publishing $pkg_path from $tarball"
-            pnpm publish "$tarball" --no-git-checks --access restricted
+            if ! out=$(pnpm publish "$tarball" --no-git-checks --access restricted 2>&1); then
+              if printf '%s' "$out" | grep -qiE 'EPUBLISHCONFLICT|cannot publish over|already exists|409'; then
+                echo "  already published, skipping"
+              else
+                printf '%s\n' "$out"
+                failed=1
+              fi
+            fi
           done < "$GITHUB_WORKSPACE/.artifacts/manifest.tsv"
+          exit "$failed"
