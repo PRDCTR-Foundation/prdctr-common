@@ -10,8 +10,6 @@
 //     `D`. The package ships no descriptors and is pinned to no runtime version; the consumer injects
 //     them, and `chain.api()` still returns their `TypedApi<D>`.
 
-import { fileURLToPath } from "node:url";
-import { Worker } from "node:worker_threads";
 import {
 	classifyChainError,
 	PermanentChainError,
@@ -92,6 +90,12 @@ export interface WsChainOptions extends ChainCommonOptions {
 	readonly logger?: SocketLoggerFn;
 }
 
+/**
+ * The worker smoldot runs in, typed off {@link startFromWorker} so this package carries no
+ * `node:worker_threads` import of its own.
+ */
+export type SmoldotWorker = Parameters<typeof startFromWorker>[0];
+
 /** Configuration for the {@link SmoldotChainOptions} light-client transport. */
 export interface SmoldotChainConfig {
 	/**
@@ -100,6 +104,18 @@ export interface SmoldotChainConfig {
 	 * chain's spec (not modelled here yet).
 	 */
 	readonly chainSpec: string;
+	/**
+	 * Constructs the worker thread smoldot runs in. The caller supplies it, so the Node dependency lives
+	 * at the call site rather than in this module - which keeps the WebSocket transport usable on runtimes
+	 * without worker threads. A Node consumer passes:
+	 *
+	 * ```ts
+	 * createWorker: () => new Worker(fileURLToPath(import.meta.resolve("polkadot-api/smoldot/node-worker")))
+	 * ```
+	 *
+	 * Called once per {@link ChainBase.client} construction; the instance is terminated in `disconnect()`.
+	 */
+	readonly createWorker: () => SmoldotWorker;
 }
 
 /**
@@ -182,10 +198,7 @@ export class ChainBase {
 	 * destroys it during recovery.
 	 */
 	#smoldotProvider(config: SmoldotChainConfig) {
-		const worker = new Worker(
-			fileURLToPath(import.meta.resolve("polkadot-api/smoldot/node-worker")),
-		);
-		const smoldot = startFromWorker(worker);
+		const smoldot = startFromWorker(config.createWorker());
 		this.#smoldot = smoldot;
 		return getSmProvider(() => smoldot.addChain({ chainSpec: config.chainSpec }));
 	}
