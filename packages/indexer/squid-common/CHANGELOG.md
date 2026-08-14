@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.0.0](https://github.com/PRDCTR-Foundation/prdctr-common/compare/squid-common-v1.5.1...squid-common-v2.0.0) (2026-08-14)
+
+
+### ⚠ BREAKING CHANGES
+
+* packages are published as @prdctr-foundation/*. Consumers must update their dependency names and their .npmrc scope mapping.
+
+### Features
+
+* publish under the [@prdctr-foundation](https://github.com/prdctr-foundation) scope ([#25](https://github.com/PRDCTR-Foundation/prdctr-common/issues/25)) ([2219483](https://github.com/PRDCTR-Foundation/prdctr-common/commit/2219483005cfb7a1822f456e5958f8ec7788e29f))
+
 ## [1.5.1](https://github.com/Predictor-Foundation/prdctr-common/compare/squid-common-v1.5.0...squid-common-v1.5.1) (2026-07-30)
 
 

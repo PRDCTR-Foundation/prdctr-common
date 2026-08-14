@@ -1,6 +1,6 @@
 {
 	"name": "@prdctr-foundation/graphql-client",
-	"version": "0.1.3",
+	"version": "0.2.0",
 	"description": "Framework-light GraphQL-over-HTTP client for Predictor Foundation frontends: fetchGraphql, fragment registry, Relay connection to page mapping, a non-fatal error hierarchy, and an optional SWR/React data-fetch layer",
 	"license": "UNLICENSED",
 	"private": false,

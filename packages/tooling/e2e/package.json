@@ -1,6 +1,6 @@
 {
 	"name": "@prdctr-foundation/e2e",
-	"version": "0.1.5",
+	"version": "0.2.0",
 	"description": "Zero-setup Playwright E2E harness (config factory, server orchestration, re-exported test API) for the Predictor Foundation",
 	"license": "UNLICENSED",
 	"private": false,
