@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.2.0](https://github.com/PRDCTR-Foundation/prdctr-common/compare/papi-chain-v0.1.5...papi-chain-v0.2.0) (2026-08-14)
+
+
+### ⚠ BREAKING CHANGES
+
+* packages are published as @prdctr-foundation/*. Consumers must update their dependency names and their .npmrc scope mapping.
+* **papi-chain:** smoldot callers must pass smoldot.createWorker.
+
+### Features
+
+* **papi-chain:** take the smoldot worker from the caller ([#24](https://github.com/PRDCTR-Foundation/prdctr-common/issues/24)) ([d06cf6a](https://github.com/PRDCTR-Foundation/prdctr-common/commit/d06cf6a42ba3fa3ab6cadf3106abdfddd16114cd))
+* publish under the [@prdctr-foundation](https://github.com/prdctr-foundation) scope ([#25](https://github.com/PRDCTR-Foundation/prdctr-common/issues/25)) ([2219483](https://github.com/PRDCTR-Foundation/prdctr-common/commit/2219483005cfb7a1822f456e5958f8ec7788e29f))
+
 ## [0.1.5](https://github.com/Predictor-Foundation/prdctr-common/compare/papi-chain-v0.1.4...papi-chain-v0.1.5) (2026-07-30)
 
 
