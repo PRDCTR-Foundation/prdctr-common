@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.1](https://github.com/PRDCTR-Foundation/prdctr-common/compare/git-hooks-v0.5.0...git-hooks-v0.5.1) (2026-08-14)
+
+
+### Bug Fixes
+
+* **git-hooks:** don't abort commits when the audit backend is unreachable ([#21](https://github.com/PRDCTR-Foundation/prdctr-common/issues/21)) ([6a2af5e](https://github.com/PRDCTR-Foundation/prdctr-common/commit/6a2af5e661b976848b99aa147778a14f3f56fc08))
+
 ## [0.5.0](https://github.com/PRDCTR-Foundation/prdctr-common/compare/git-hooks-v0.4.4...git-hooks-v0.5.0) (2026-08-14)
 
 

@@ -11,7 +11,7 @@
 	"packages/indexer/squid-common": "2.0.0",
 	"packages/tooling/tsconfig": "0.5.0",
 	"packages/tooling/biome-config": "0.5.0",
-	"packages/tooling/git-hooks": "0.5.0",
+	"packages/tooling/git-hooks": "0.5.1",
 	"packages/chain/network-constants": "0.2.0",
 	"packages/service/logger": "0.2.0",
 	"packages/service/env": "0.2.0",
