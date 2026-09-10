@@ -92,3 +92,58 @@ test("withRetry rethrows a permanent error immediately", async () => {
 	);
 	assert.equal(attempts, 1);
 });
+
+// --- submission errors -------------------------------------------------------
+//
+// These arrive from the transaction pool and from InvalidTransaction. The split
+// that matters: the umbrella spans both kinds, so the variant decides. Two
+// services classified the umbrella oppositely before this existed - the heartbeat
+// daemon read it as permanent, the node migrator as transient - and both were
+// defensible because the umbrella alone does not say.
+
+const submissionTransient = [
+	"InvalidTransaction: Stale",
+	"Invalid Transaction: Stale",
+	"1010: Invalid Transaction: Transaction is outdated (Stale)",
+	"InvalidTransaction: Future",
+	"InvalidTransaction: ExhaustsResources",
+	"Transaction Dropped from the pool",
+	"1014: Priority is too low: (0 vs 100)",
+	"Transaction is temporarily banned",
+	"InvalidTransaction: AncientBirthBlock",
+];
+
+for (const msg of submissionTransient) {
+	test(`submission transient: "${msg}" -> RetryableError`, () => {
+		const classified = classifyChainError(new Error(msg));
+		assert.ok(
+			classified instanceof RetryableError,
+			`expected RetryableError, got ${classified.name}: ${classified.message}`,
+		);
+	});
+}
+
+const submissionPermanent = [
+	// The signer cannot pay the fee. Resubmitting the same transaction from the
+	// same unfunded account fails identically, forever.
+	"InvalidTransaction: Payment",
+	"1010: Invalid Transaction: Inability to pay some fees",
+	"InvalidTransaction: BadProof",
+	"InvalidTransaction: BadSigner",
+	"InvalidTransaction: Call",
+	"InvalidTransaction: BadMandatory",
+	"InvalidTransaction: MandatoryValidation",
+	// The umbrella with no variant stays permanent, which is what the heartbeat
+	// daemon already relied on.
+	"Invalid Transaction",
+];
+
+for (const msg of submissionPermanent) {
+	test(`submission permanent: "${msg}" -> not retryable`, () => {
+		const classified = classifyChainError(new Error(msg));
+		assert.ok(
+			!(classified instanceof RetryableError),
+			`expected permanent, got RetryableError: ${classified.message}`,
+		);
+	});
+}

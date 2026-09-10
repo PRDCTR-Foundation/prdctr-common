@@ -47,6 +47,34 @@ const TRANSIENT_PATTERNS: readonly RegExp[] = [
 ];
 
 /**
+ * Substrings that mark a raw error as a transient failure of SUBMISSION rather than transport.
+ *
+ * These come from the transaction pool and from `InvalidTransaction`, and they are the ones a
+ * resubmission can clear: a nonce read before another submission landed (`Stale`), a nonce read
+ * ahead of the chain (`Future`), a full block (`ExhaustsResources`), a transaction the pool dropped
+ * or banned under load, or one outbid on priority.
+ *
+ * Deliberately NOT here: the umbrella `InvalidTransaction` with no variant, and the variants a
+ * resubmission cannot fix - `Payment` (the signer cannot pay the fee), `BadProof`, `BadSigner`,
+ * `Call`, `BadMandatory`, `MandatoryValidation`. Those stay permanent, which is what the default
+ * already gives them.
+ *
+ * Matching is on the variant, not the umbrella, because `InvalidTransaction` spans both kinds -
+ * `InvalidTransaction: Stale` is worth retrying and `InvalidTransaction: Payment` never is. A
+ * classifier keyed on the umbrella has to pick one answer for both and is wrong half the time.
+ */
+const SUBMISSION_TRANSIENT_PATTERNS: readonly RegExp[] = [
+	/\bStale\b/i,
+	/\bFuture\b/i,
+	/ExhaustsResources/i,
+	/\bDropped\b/i,
+	/Priority is too low/i,
+	/temporarily banned/i,
+	/AncientBirthBlock/i,
+	/Transaction pool.*full/i,
+];
+
+/**
  * Turn any thrown value into a classified error. Already-classified errors pass through untouched
  * (so a stringified dispatch error that happens to contain "connection" can never be re-read as
  * transient). Raw errors whose message matches a transient pattern become {@link RetryableError};
@@ -56,6 +84,11 @@ export function classifyChainError(err: unknown): Error {
 	if (err instanceof RetryableError || err instanceof PermanentChainError) return err;
 	const message = err instanceof Error ? err.message : String(err);
 	if (TRANSIENT_PATTERNS.some((re) => re.test(message))) {
+		return new RetryableError(message, { cause: err });
+	}
+	// Checked after transport, before the permanent default: a submission error naming a transient
+	// variant is retryable even though the umbrella it arrives under is not.
+	if (SUBMISSION_TRANSIENT_PATTERNS.some((re) => re.test(message))) {
 		return new RetryableError(message, { cause: err });
 	}
 	return err instanceof Error ? err : new Error(message);
