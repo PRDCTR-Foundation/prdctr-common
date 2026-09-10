@@ -1,0 +1,178 @@
+# Reusable Docker release workflow.
+#
+# Five service repos carried a copy of this. Two shapes had grown: single
+# component (heartbeat-service, prdctr-bridge-dapp, node-migrator) and a matrix
+# over several (faucet, block-explorer, prdctr-squids). They are the same
+# workflow - a single component is a matrix of one - so this takes the matrix as
+# an input and covers both.
+#
+# Every repo already tags releases as `<component>-v<version>`, which is what
+# release-please cuts, so the tag rule is uniform and lives here.
+#
+# Caller (in a consumer repo, .github/workflows/docker-release.yml):
+#
+#   name: Release Docker Image
+#   on:
+#     push:
+#       tags: [heartbeat-service-v*]
+#     workflow_dispatch:
+#       inputs:
+#         version: { required: true, type: string }
+#   permissions:
+#     contents: read
+#     packages: write
+#   jobs:
+#     publish:
+#       uses: PRDCTR-Foundation/prdctr-common/.github/workflows/reusable-docker-release.yml@main
+#       secrets: inherit
+#       with:
+#         components: >-
+#           [{"component":"heartbeat-service","image":"heartbeat-service",
+#             "context":".","dockerfile":"Dockerfile","registrySecret":true}]
+#         version: ${{ inputs.version }}
+#
+# Per-component keys, all optional except component/image:
+#   component       name in the tag `<component>-v<version>` and in dispatch selection
+#   image           image name under `registry`
+#   context         build context (default ".")
+#   dockerfile      path to the Dockerfile (default "Dockerfile")
+#   buildCommand    run before the build, for images over a prebuilt artifact
+#                   (a Vite dist). Implies a pnpm + Node setup.
+#   registrySecret  pass GITHUB_TOKEN as the `github_token` BuildKit secret, for
+#                   a Dockerfile that installs private @prdctr-foundation deps.
+#                   Never baked into a layer.
+#   nodeMaxHeap     NODE_OPTIONS max-old-space-size for buildCommand, for the
+#                   builds that exhaust the default heap.
+
+name: Reusable Docker Release
+
+on:
+  workflow_call:
+    inputs:
+      components:
+        description: JSON array of component descriptors. A single component is an array of one.
+        required: true
+        type: string
+      registry:
+        description: Image registry namespace.
+        type: string
+        default: ghcr.io/prdctr-foundation
+      component:
+        description: On workflow_dispatch, which component to publish. Ignored on a tag push.
+        type: string
+        default: ''
+      version:
+        description: On workflow_dispatch, the version to publish. Ignored on a tag push.
+        type: string
+        default: ''
+      node-version:
+        description: Node version used only when a component sets buildCommand.
+        type: string
+        default: '24'
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include: ${{ fromJSON(inputs.components) }}
+    concurrency:
+      group: docker-release-${{ github.ref_name || format('{0}-{1}', inputs.component, inputs.version) }}-${{ matrix.component }}
+      cancel-in-progress: false
+    env:
+      REGISTRY: ${{ inputs.registry }}
+      # One gate, evaluated once. A tag push selects the component whose name it
+      # carries; a dispatch selects the one it was given. Everything below is
+      # skipped for the components this run is not about, so a matrix of four
+      # publishes one image rather than four.
+      SELECTED: ${{ (github.event_name == 'workflow_dispatch' && inputs.component == matrix.component) || startsWith(github.ref_name, format('{0}-v', matrix.component)) }}
+
+    steps:
+      - name: Checkout
+        if: env.SELECTED == 'true'
+        uses: actions/checkout@v4
+
+      - name: Resolve Version
+        id: version
+        if: env.SELECTED == 'true'
+        shell: bash
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          INPUT_VERSION: ${{ inputs.version }}
+          COMPONENT: ${{ matrix.component }}
+        run: |
+          set -euo pipefail
+
+          if [[ "$EVENT_NAME" == "workflow_dispatch" ]]; then
+            version="${INPUT_VERSION#v}"
+          else
+            version="${GITHUB_REF_NAME#${COMPONENT}-v}"
+          fi
+
+          if [[ ! "$version" =~ ^[0-9]+[.][0-9]+[.][0-9]+([-.][0-9A-Za-z.-]+)?$ ]]; then
+            echo "Unsupported version format: $version"
+            exit 1
+          fi
+
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+          echo "component_tag=${COMPONENT}-v${version}" >> "$GITHUB_OUTPUT"
+
+      - name: Set Up pnpm
+        if: env.SELECTED == 'true' && matrix.buildCommand
+        uses: pnpm/action-setup@v4
+
+      - name: Set Up Node
+        if: env.SELECTED == 'true' && matrix.buildCommand
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ inputs.node-version }}
+          cache: pnpm
+
+      - name: Build Artifact
+        if: env.SELECTED == 'true' && matrix.buildCommand
+        env:
+          # .npmrc reads ${GITHUB_TOKEN}; the auto token can install the private
+          # @prdctr-foundation/* packages only if this repo has been granted read
+          # access to them (Package settings -> Manage Actions access).
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_OPTIONS: ${{ matrix.nodeMaxHeap && format('--max-old-space-size={0}', matrix.nodeMaxHeap) || '' }}
+        run: |
+          pnpm install --frozen-lockfile
+          ${{ matrix.buildCommand }}
+
+      - name: Docker Metadata
+        id: meta
+        if: env.SELECTED == 'true'
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ matrix.image }}
+          tags: |
+            type=raw,value=${{ steps.version.outputs.version }}
+            type=raw,value=${{ steps.version.outputs.component_tag }}
+            type=raw,value=latest,enable=${{ !contains(steps.version.outputs.version, '-') }}
+
+      - name: Set Up Docker Buildx
+        if: env.SELECTED == 'true'
+        uses: docker/setup-buildx-action@v3
+
+      - name: Login To GHCR
+        if: env.SELECTED == 'true'
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build And Push Image
+        if: env.SELECTED == 'true'
+        uses: docker/build-push-action@v6
+        with:
+          context: ${{ matrix.context || '.' }}
+          file: ${{ matrix.dockerfile || 'Dockerfile' }}
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          secrets: ${{ matrix.registrySecret && format('github_token={0}', secrets.GITHUB_TOKEN) || '' }}
+          provenance: false
+          sbom: false
