@@ -10,7 +10,7 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/Predictor-Foundation/prdctr-common.git",
+		"url": "git+https://github.com/PRDCTR-Foundation/prdctr-common.git",
 		"directory": "packages/web/ui"
 	},
 	"main": "lib/index.js",

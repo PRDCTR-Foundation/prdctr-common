@@ -32,7 +32,7 @@ jobs:
     steps:
       # Mint a short-lived installation token for the release-bot GitHub App so the
       # release PR is authored by <app>[bot] instead of a human's PAT. An app (or PAT)
-      # is required because the Predictor-Foundation org disables Actions (the
+      # is required because the PRDCTR-Foundation org disables Actions (the
       # auto-provided GITHUB_TOKEN) from creating/approving PRs. The app must have
       # contents:write + pull-requests:write + packages:write on this repo; its App ID
       # lives in the PRD_RELEASE_PLEASE_APP_ID org variable and its private key in the
