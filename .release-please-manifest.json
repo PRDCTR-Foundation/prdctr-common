@@ -1,7 +1,7 @@
 {
 	"packages/chain/scale": "0.2.0",
 	"packages/chain/substrate-primitives": "0.2.0",
-	"packages/chain/chain-errors": "0.2.0",
+	"packages/chain/chain-errors": "0.2.1",
 	"packages/chain/substrate-signer": "0.2.0",
 	"packages/chain/node-manager": "0.2.0",
 	"packages/chain/papi-chain": "0.2.0",

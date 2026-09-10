@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.1](https://github.com/PRDCTR-Foundation/prdctr-common/compare/chain-errors-v0.2.0...chain-errors-v0.2.1) (2026-09-10)
+
+
+### Features
+
+* **chain-errors:** classify substrate submission failures by variant ([#31](https://github.com/PRDCTR-Foundation/prdctr-common/issues/31)) ([e566afa](https://github.com/PRDCTR-Foundation/prdctr-common/commit/e566afa1a1409b9610b60e4a73840f177aecfb61))
+
 ## [0.2.0](https://github.com/PRDCTR-Foundation/prdctr-common/compare/chain-errors-v0.1.4...chain-errors-v0.2.0) (2026-08-14)
 
 

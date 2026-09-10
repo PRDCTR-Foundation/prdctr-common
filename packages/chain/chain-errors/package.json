@@ -1,6 +1,6 @@
 {
 	"name": "@prdctr-foundation/chain-errors",
-	"version": "0.2.0",
+	"version": "0.2.1",
 	"description": "Chain-boundary error taxonomy (RetryableError / PermanentChainError / classifyChainError) + retry/backoff for the Predictor Foundation PAPI services",
 	"license": "UNLICENSED",
 	"private": false,
