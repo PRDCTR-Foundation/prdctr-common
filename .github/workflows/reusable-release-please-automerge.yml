@@ -1,0 +1,59 @@
+# Reusable release-please automerge workflow. Every PRDCTR service repo carried
+# a byte-identical copy of this alongside its release-please.yml; this is the
+# single source of truth they call instead.
+#
+# It approves and enables automerge on the release PR only. The approving
+# identity is the release-bot GitHub App and the merge is enabled with the same
+# token, because the org blocks the auto-provided GITHUB_TOKEN from acting on
+# PRs. Credentials are org-level: PRD_RELEASE_PLEASE_APP_ID (variable) and
+# PRD_RELEASE_PLEASE_APP_PRIVATE_KEY (secret), so callers must pass
+# `secrets: inherit`.
+#
+# Caller (in a consumer repo, .github/workflows/release-please-automerge.yml):
+#
+#   name: Release Please - Automerge
+#   on:
+#     pull_request_target:
+#       types: [opened, synchronize, reopened]
+#   jobs:
+#     automerge:
+#       uses: PRDCTR-Foundation/prdctr-common/.github/workflows/reusable-release-please-automerge.yml@main
+#       secrets: inherit
+#
+# The guard lives here rather than in the caller so every repo gets the same
+# one: only a branch release-please opened, and only from this repository - a
+# fork must not be able to trigger an automerge.
+
+name: Reusable Release Please - Automerge
+
+on:
+  workflow_call:
+    inputs:
+      merge-method:
+        description: How to merge the release PR.
+        type: string
+        default: squash
+
+jobs:
+  automerge:
+    if: >-
+      startsWith(github.event.pull_request.head.ref, 'release-please-')
+      && github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Generate bot token
+        id: app-token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ vars.PRD_RELEASE_PLEASE_APP_ID }}
+          private-key: ${{ secrets.PRD_RELEASE_PLEASE_APP_PRIVATE_KEY }}
+
+      - name: Enable automerge
+        uses: peter-evans/enable-pull-request-automerge@v3
+        with:
+          token: ${{ steps.app-token.outputs.token }}
+          pull-request-number: ${{ github.event.pull_request.number }}
+          merge-method: ${{ inputs.merge-method }}
