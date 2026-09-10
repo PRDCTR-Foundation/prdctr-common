@@ -4,7 +4,7 @@
 #
 # It authenticates as the release-bot GitHub App, so release PRs are authored by
 # <app>[bot] rather than a human's PAT. An app is required because the
-# Predictor-Foundation org disables Actions (the auto-provided GITHUB_TOKEN) from
+# PRDCTR-Foundation org disables Actions (the auto-provided GITHUB_TOKEN) from
 # creating/approving PRs. Credentials are org-level: the App ID is the
 # PRD_RELEASE_PLEASE_APP_ID org variable (read directly via the vars context) and
 # the private key is the PRD_RELEASE_PLEASE_APP_PRIVATE_KEY org secret (reusable
@@ -21,7 +21,7 @@
 #     pull-requests: write
 #   jobs:
 #     release-please:
-#       uses: Predictor-Foundation/prdctr-common/.github/workflows/reusable-release-please.yml@main
+#       uses: PRDCTR-Foundation/prdctr-common/.github/workflows/reusable-release-please.yml@main
 #       secrets: inherit
 #
 # The config-file / manifest-file inputs default to the repo-root filenames every
