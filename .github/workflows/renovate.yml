@@ -1,0 +1,95 @@
+# Self-hosted Renovate.
+#
+# One job, in this org, on this org's runner, authenticating as the org's own
+# GitHub App. No third party is granted standing access to any repository -
+# which is the difference between this and "install the Renovate app".
+#
+# Blast radius is the `repositories` list below and nothing else:
+# autodiscovery is off, onboarding is off, and requireConfig is `required`, so
+# Renovate will not touch a repository that has not committed a renovate.json
+# of its own. Adding a repo here without that file is a no-op; the opt-in lives
+# in the repo, visible in its own tree.
+#
+# Credentials are the release-bot App already used for release-please - the
+# same trust decision the org has already made - so this adds a job to an
+# existing bot rather than a new actor. It needs contents:write and
+# pull-requests:write on the listed repositories.
+#
+# The action is pinned to a commit SHA rather than a tag: a tag can be moved,
+# and this job holds a token that can push branches.
+
+name: Renovate
+
+on:
+  schedule:
+    # Every six hours. The cadence of the JOB is not the cadence of the
+    # UPDATES - each repo's config decides that, and the shared preset holds
+    # ordinary updates until Monday. The job has to run more often than that
+    # anyway, because the preset deliberately lets vulnerability fixes ignore
+    # the schedule, and a fix cannot arrive sooner than the next run.
+    - cron: "0 */6 * * *"
+  workflow_dispatch:
+    inputs:
+      logLevel:
+        description: Log level for a manual run.
+        type: choice
+        default: info
+        options: [info, debug]
+      dryRun:
+        description: Report what it would do, without opening anything.
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: renovate
+  cancel-in-progress: false
+
+jobs:
+  renovate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Generate bot token
+        id: app-token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ vars.PRD_RELEASE_PLEASE_APP_ID }}
+          private-key: ${{ secrets.PRD_RELEASE_PLEASE_APP_PRIVATE_KEY }}
+          owner: ${{ github.repository_owner }}
+          repositories: |
+            prdctr-common
+            heartbeat-service
+            faucet
+            block-explorer
+            prdctr-squids
+            prdctr-bridge-dapp
+            node-migrator
+
+      - name: Renovate
+        uses: renovatebot/github-action@37beffda261423addd537c33f2d126df7f6ffbab # v46.2.6
+        env:
+          RENOVATE_PLATFORM: github
+          RENOVATE_AUTODISCOVER: "false"
+          RENOVATE_ONBOARDING: "false"
+          RENOVATE_REQUIRE_CONFIG: required
+          RENOVATE_REPOSITORIES: >-
+            PRDCTR-Foundation/prdctr-common,
+            PRDCTR-Foundation/heartbeat-service,
+            PRDCTR-Foundation/faucet,
+            PRDCTR-Foundation/block-explorer,
+            PRDCTR-Foundation/prdctr-squids,
+            PRDCTR-Foundation/prdctr-bridge-dapp,
+            PRDCTR-Foundation/node-migrator
+          RENOVATE_GIT_AUTHOR: "prd-release-bot <noreply@prdctr.io>"
+          # The private @prdctr-foundation packages live on GitHub Packages, so
+          # Renovate needs the same credential to see that a new version exists.
+          RENOVATE_HOST_RULES: >-
+            [{"matchHost":"npm.pkg.github.com","hostType":"npm","token":"${{ steps.app-token.outputs.token }}"}]
+          # 'null' rather than an empty string: Renovate reads the env var as a
+          # config value, and empty is not one of the ones it accepts.
+          RENOVATE_DRY_RUN: ${{ inputs.dryRun && 'full' || 'null' }}
+          LOG_LEVEL: ${{ inputs.logLevel || 'info' }}
+        with:
+          token: ${{ steps.app-token.outputs.token }}
