@@ -43,6 +43,7 @@ jobs:
             service-runtime
             graphql-client
             packages
+            deps
           requireScope: true
           # release-please opens PRs titled "chore(main): release X" - exempt them.
           ignoreLabels: |

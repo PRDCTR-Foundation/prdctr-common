@@ -1,0 +1,71 @@
+{
+	"$schema": "https://docs.renovatebot.com/renovate-schema.json",
+	"description": [
+		"Shared Renovate preset for PRDCTR Foundation repositories. Extend it with { \"extends\": [\"local>PRDCTR-Foundation/prdctr-common\"] }.",
+		"It exists because nothing kept dependencies current: the shared packages were found two releases behind in one consumer, and the hand-maintained CVE override lists drifted behind the advisories they existed to satisfy, until the pre-commit audit gate refused every commit in three repos.",
+		"chore(deps) is the commit shape these repos' pr-title workflow accepts - chore is an allowed type everywhere and deps an allowed scope - because Renovate's own PRs must pass the same gate as anyone else's.",
+		"minimumReleaseAge mirrors the supply-chain cooldown already set in this repo's pnpm-workspace.yaml (1440 minutes), so a package compromised at publish time is not adopted the same day.",
+		"Nothing automerges and nothing ignores tests. A leftover config in one repo did both, which would have landed dependency bumps in a repo that had no CI at all until recently."
+	],
+	"extends": ["config:recommended", ":semanticCommits"],
+	"timezone": "Europe/London",
+	"schedule": ["before 6am on Monday"],
+	"labels": ["dependencies"],
+	"prConcurrentLimit": 5,
+	"prHourlyLimit": 2,
+	"semanticCommitType": "chore",
+	"semanticCommitScope": "deps",
+	"minimumReleaseAge": "1 day",
+	"automerge": false,
+
+	"lockFileMaintenance": {
+		"enabled": true,
+		"schedule": ["before 6am on Monday"]
+	},
+
+	"vulnerabilityAlerts": {
+		"description": "A vulnerability is the one case that should not wait for Monday, and should not sit out the cooldown either - the fix is the point.",
+		"enabled": true,
+		"labels": ["dependencies", "security"],
+		"schedule": ["at any time"],
+		"minimumReleaseAge": null
+	},
+	"osvVulnerabilityAlerts": true,
+
+	"packageRules": [
+		{
+			"description": "The shared packages are ours: no cooldown, and one PR rather than eighteen. Consumers drifting behind these is the drift that actually costs time.",
+			"matchPackageNames": ["@prdctr-foundation/**"],
+			"groupName": "prdctr-foundation shared packages",
+			"schedule": ["at any time"],
+			"minimumReleaseAge": null,
+			"prPriority": 5
+		},
+		{
+			"description": "Chain libraries move fast and break things. They get their own PR so a failure is attributable rather than buried in a batch.",
+			"matchPackageNames": [
+				"@polkadot/**",
+				"polkadot-api",
+				"@polkadot-api/**",
+				"@polkadot-labs/**"
+			],
+			"groupName": "polkadot"
+		},
+		{
+			"description": "Subsquid ships its stack as a set; splitting it produces PRs that cannot pass on their own.",
+			"matchPackageNames": ["@subsquid/**"],
+			"groupName": "subsquid"
+		},
+		{
+			"description": "Tooling is low risk and high noise, so it batches.",
+			"matchPackageNames": ["@biomejs/**", "typescript", "@types/**"],
+			"matchUpdateTypes": ["minor", "patch"],
+			"groupName": "dev tooling"
+		},
+		{
+			"description": "A major of anything gets read by a person, on its own.",
+			"matchUpdateTypes": ["major"],
+			"dependencyDashboardApproval": true
+		}
+	]
+}

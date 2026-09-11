@@ -96,6 +96,36 @@ Subsquid repos extend `@prdctr-foundation/tsconfig/subsquid` and
 `@prdctr-foundation/biome-config/subsquid` instead, and add
 `@prdctr-foundation/squid-common` as a runtime dep.
 
+## Keeping dependencies current
+
+This repo publishes the Renovate preset every service repo extends. Drop a
+`renovate.json` at the consumer's root:
+
+```json
+{
+	"$schema": "https://docs.renovatebot.com/renovate-schema.json",
+	"extends": ["local>PRDCTR-Foundation/prdctr-common"]
+}
+```
+
+That is the whole adoption. The preset is `default.json` here, and it sets the
+schedule, the grouping, the supply-chain cooldown and the commit shape - a
+consumer overriding any of it should do so in its own file rather than by
+forking the preset.
+
+Two things it is deliberately opinionated about. Nothing automerges and nothing
+ignores tests, because dependency bumps landing unreviewed is how a repo with
+thin CI breaks quietly. And Renovate's own PRs are titled `chore(deps): ...` so
+they pass the same `pr-title` gate as everyone else's, which means `deps` has to
+stay in each repo's allowed scopes.
+
+`local>` rather than `github>` because this repo is private: the local form
+reuses the platform token Renovate already has, where the github form would need
+credentials of its own.
+
+Renovate needs the GitHub App installed on the org with access to each repo;
+until it is, the config is inert.
+
 ## Repo conventions
 
 - **Commit messages:** [Conventional Commits](https://www.conventionalcommits.org/).
