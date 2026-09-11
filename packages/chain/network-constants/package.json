@@ -1,6 +1,6 @@
 {
 	"name": "@prdctr-foundation/network-constants",
-	"version": "0.2.0",
+	"version": "0.2.1",
 	"description": "Single source of truth for PRDCTR network coordinates: SS58 prefix, token decimals/symbol, WS endpoints, explorer base URLs and deep-link builders",
 	"license": "UNLICENSED",
 	"private": false,
