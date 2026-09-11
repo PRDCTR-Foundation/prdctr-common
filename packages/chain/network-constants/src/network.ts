@@ -10,7 +10,7 @@ import type { Ss58Prefix } from "./ss58";
  * Modelled as a closed union rather than a free string so a typo (`"testent"`)
  * is a compile error and every consumer switches exhaustively.
  */
-export type PredictorNetworkId = "testnet" | "dev";
+export type PredictorNetworkId = "mainnet" | "testnet" | "dev";
 
 /**
  * A non-empty, readonly list of WebSocket endpoints for a network. The tuple

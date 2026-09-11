@@ -16,6 +16,7 @@ export {
 export {
 	getPredictorNetwork,
 	PREDICTOR_DEV,
+	PREDICTOR_MAINNET,
 	PREDICTOR_NETWORKS,
 	PREDICTOR_TESTNET,
 } from "./networks";

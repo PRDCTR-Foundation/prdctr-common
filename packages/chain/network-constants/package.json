@@ -23,6 +23,8 @@
 	},
 	"scripts": {
 		"build": "rm -rf lib *.tsbuildinfo && tsc",
+		"test": "npm run build && node --test 'test/*.test.mjs'",
+		"types:check": "tsc --noEmit",
 		"typecheck": "tsc --noEmit",
 		"clean": "rm -rf lib *.tsbuildinfo"
 	},
