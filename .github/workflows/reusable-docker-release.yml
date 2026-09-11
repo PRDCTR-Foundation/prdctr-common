@@ -41,6 +41,9 @@
 #   registrySecret  pass GITHUB_TOKEN as the `github_token` BuildKit secret, for
 #                   a Dockerfile that installs private @prdctr-foundation deps.
 #                   Never baked into a layer.
+#   target          build stage to stop at, for a Dockerfile whose stages are
+#                   several images rather than one build pipeline. Omitted means
+#                   the final stage, which is the usual case.
 #   nodeMaxHeap     NODE_OPTIONS max-old-space-size for buildCommand, for the
 #                   builds that exhaust the default heap.
 
@@ -170,6 +173,8 @@ jobs:
         with:
           context: ${{ matrix.context || '.' }}
           file: ${{ matrix.dockerfile || 'Dockerfile' }}
+          # Empty is a no-op: the build stops at the Dockerfile's final stage.
+          target: ${{ matrix.target || '' }}
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
