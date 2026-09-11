@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.1](https://github.com/PRDCTR-Foundation/prdctr-common/compare/network-constants-v0.2.0...network-constants-v0.2.1) (2026-09-11)
+
+
+### Features
+
+* **network-constants:** add mainnet and name the hosted dev RPC ([#35](https://github.com/PRDCTR-Foundation/prdctr-common/issues/35)) ([3a35461](https://github.com/PRDCTR-Foundation/prdctr-common/commit/3a3546143daf732a8f6dfa62405619f92883fd9a))
+
 ## [0.2.0](https://github.com/PRDCTR-Foundation/prdctr-common/compare/network-constants-v0.1.3...network-constants-v0.2.0) (2026-08-14)
 
 
