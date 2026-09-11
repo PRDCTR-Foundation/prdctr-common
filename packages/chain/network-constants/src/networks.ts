@@ -21,6 +21,25 @@ function defineNetwork(net: PredictorNetwork): PredictorNetwork {
 }
 
 /**
+ * PRDCTR mainnet, live since 2026-07-28.
+ *
+ * Provenance: the launch record of 2026-07-28 - chain at
+ * `wss://chain-external.prdctr.io`, explorer at `explorer.prdctr.io`. The
+ * coordinates (SS58 42, 10 decimals, PRD) are the same as testnet; only the
+ * endpoints differ.
+ */
+export const PREDICTOR_MAINNET: PredictorNetwork = defineNetwork({
+	id: "mainnet",
+	displayName: "PRDCTR Mainnet",
+	ss58Prefix: PREDICTOR_SS58_PREFIX,
+	decimals: 10,
+	tokenSymbol: "PRD",
+	wsEndpoints: ["wss://chain-external.prdctr.io"],
+	explorerBaseUrl: "https://explorer.prdctr.io",
+	explorerNetworkPath: EXPLORER_NETWORK_PATH,
+});
+
+/**
  * The public PRDCTR testnet, code-named "Cassandra".
  *
  * Provenance:
@@ -48,11 +67,12 @@ export const PREDICTOR_TESTNET: PredictorNetwork = defineNetwork({
  * Provenance:
  * - explorerBaseUrl: prdctr-bridge-dapp/src/config/bridgeConfig.ts default for
  *   `PREDICTOR_EXPLORER_BASE_URL` (`https://explorer.dev.prdctr.io`).
- * - wsEndpoints[0]: prdctr-bridge-dapp default for `PREDICTOR_WS_URL`
- *   (`ws://127.0.0.1:9944`). NOTE: this is the bridge dapp's *local-run*
- *   default, not a hosted dev RPC. There is no hosted dev WS endpoint
- *   hardcoded in any repo, so none is invented here; override via config in
- *   deployment.
+ * - wsEndpoints[0]: `wss://rpc-node.dev.prdctr.io`, the hosted dev RPC named by
+ *   prdctr-bridge-dapp's `.env.example` and prdctr-squids' `metadata:explore`
+ *   script. An earlier revision of this file recorded that no hosted dev
+ *   endpoint existed in any repo and used the bridge dapp's *local-run*
+ *   default instead; that was wrong. A local node is an override, not the
+ *   meaning of "dev".
  * - ss58Prefix / decimals / tokenSymbol: identical to testnet (bridge dapp
  *   `prdDecimals` default 10; SS58 42; symbol "PRD" from the shared coords).
  */
@@ -62,13 +82,14 @@ export const PREDICTOR_DEV: PredictorNetwork = defineNetwork({
 	ss58Prefix: PREDICTOR_SS58_PREFIX,
 	decimals: 10,
 	tokenSymbol: "PRD",
-	wsEndpoints: ["ws://127.0.0.1:9944"],
+	wsEndpoints: ["wss://rpc-node.dev.prdctr.io"],
 	explorerBaseUrl: "https://explorer.dev.prdctr.io",
 	explorerNetworkPath: EXPLORER_NETWORK_PATH,
 });
 
 /** All known PRDCTR networks, keyed by their {@link PredictorNetworkId}. */
 export const PREDICTOR_NETWORKS: Readonly<Record<PredictorNetworkId, PredictorNetwork>> = {
+	mainnet: PREDICTOR_MAINNET,
 	testnet: PREDICTOR_TESTNET,
 	dev: PREDICTOR_DEV,
 };
